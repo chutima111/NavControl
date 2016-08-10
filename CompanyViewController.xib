@@ -21,6 +21,7 @@
                 <outlet property="dataSource" destination="-1" id="9"/>
                 <outlet property="delegate" destination="-1" id="10"/>
             </connections>
+            <point key="canvasLocation" x="275" y="283"/>
         </tableView>
         <viewController id="Xwu-Pd-0Xh" userLabel="ProductViewController" customClass="ProductViewController">
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
