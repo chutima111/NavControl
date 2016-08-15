@@ -2,7 +2,7 @@
 #
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
 
-/Users/chutimamungmee/Desktop/NavCtrl/NavCtrl.xcodeproj/project.xcworkspace/xcuserdata/chutimamungmee.xcuserdatad/UserInterfaceState.xcuserstate
+NavCtrl/NavCtrl.xcodeproj/project.xcworkspace/xcuserdata/chutimamungmee.xcuserdatad/UserInterfaceState.xcuserstate
 ## Build generated
 build/
 DerivedData/
