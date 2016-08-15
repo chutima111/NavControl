@@ -13,6 +13,7 @@
 		20C792481D5CF25C000A0015 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20C792471D5CF25C000A0015 /* Launch Screen.storyboard */; };
 		20C7924B1D5FD1A0000A0015 /* companyInfoClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 20C7924A1D5FD1A0000A0015 /* companyInfoClass.m */; };
 		20C7924E1D5FD235000A0015 /* productClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 20C7924D1D5FD235000A0015 /* productClass.m */; };
+		20C792511D6222CA000A0015 /* DAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 20C792501D6222CA000A0015 /* DAO.m */; };
 		48A656B518163BF200746D36 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48A656B418163BF200746D36 /* Foundation.framework */; };
 		48A656B718163BF200746D36 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48A656B618163BF200746D36 /* CoreGraphics.framework */; };
 		48A656B918163BF200746D36 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48A656B818163BF200746D36 /* UIKit.framework */; };
@@ -51,6 +52,8 @@
 		20C7924A1D5FD1A0000A0015 /* companyInfoClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = companyInfoClass.m; sourceTree = "<group>"; };
 		20C7924C1D5FD235000A0015 /* productClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = productClass.h; sourceTree = "<group>"; };
 		20C7924D1D5FD235000A0015 /* productClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = productClass.m; sourceTree = "<group>"; };
+		20C7924F1D6222CA000A0015 /* DAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DAO.h; path = NavCtrl/DAO.h; sourceTree = "<group>"; };
+		20C792501D6222CA000A0015 /* DAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DAO.m; path = NavCtrl/DAO.m; sourceTree = "<group>"; };
 		48A656B118163BF200746D36 /* NavCtrl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NavCtrl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		48A656B418163BF200746D36 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		48A656B618163BF200746D36 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -144,6 +147,8 @@
 				20C7924A1D5FD1A0000A0015 /* companyInfoClass.m */,
 				20C7924C1D5FD235000A0015 /* productClass.h */,
 				20C7924D1D5FD235000A0015 /* productClass.m */,
+				20C7924F1D6222CA000A0015 /* DAO.h */,
+				20C792501D6222CA000A0015 /* DAO.m */,
 				20C792471D5CF25C000A0015 /* Launch Screen.storyboard */,
 				48A656BA18163BF200746D36 /* NavCtrl */,
 				48A656D318163BF200746D36 /* NavCtrlTests */,
@@ -321,6 +326,7 @@
 				48A656E618163C1B00746D36 /* CompanyViewController.m in Sources */,
 				48A656C518163BF200746D36 /* NavControllerAppDelegate.m in Sources */,
 				20C7924E1D5FD235000A0015 /* productClass.m in Sources */,
+				20C792511D6222CA000A0015 /* DAO.m in Sources */,
 				48A656C118163BF200746D36 /* main.m in Sources */,
 				20C792431D5C20F0000A0015 /* detailsViewController.m in Sources */,
 				48A656EB18163F8700746D36 /* ProductViewController.m in Sources */,
