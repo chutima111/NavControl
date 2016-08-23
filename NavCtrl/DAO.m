@@ -128,4 +128,66 @@
 
 }
 
+-(void)addNewCompanyToList:(NSString *)companyName
+              companyImage:(NSString *)companyImage
+             productsArray:(NSMutableArray *)productsArray
+{
+    companyInfoClass *companyInfo = [[companyInfoClass alloc] init];
+    companyInfo.companyName = companyName;
+    companyInfo.companyImageName = companyImage;
+    companyInfo.productsArray = productsArray;
+    [self.companyList addObject:companyInfo];
+}
+
+-(void)addNewProductToList:(NSString *)productName
+           productImageURL:(NSString *)productImageURL
+                productURL:(NSString *)productURL
+               companyInfo:(companyInfoClass *)companyInfo
+{
+    productClass *productInfo = [[productClass alloc] init];
+    productInfo.productName = productName;
+    productInfo.productImage = productImageURL;
+    productInfo.productUrl = productURL;
+    
+    if (companyInfo.productsArray == nil)
+        companyInfo.productsArray = [NSMutableArray array];
+    
+    [companyInfo.productsArray addObject:productInfo];
+}
+
+-(void)updateCompanyInfo:(NSString *)companyName
+   updateCompanyImageURL:(NSString *)companyImageURL
+                 company:(companyInfoClass *)company
+{
+    company.companyName = companyName;
+    company.companyImageName = companyImageURL;
+    
+}
+
+-(void)updateProductInfo:(NSString *)productName
+        updateProductURL:(NSString *)productURL
+   updateProductImageURL:(NSString *)productImageURL
+             productInfo:(productClass *)productInfo
+{
+    productInfo.productName = productName;
+    productInfo.productUrl = productURL;
+    productInfo.productImage = productImageURL;
+}
+
+
+
++(DAO *)sharedInstance
+{
+    static DAO *sharedInstance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[DAO alloc]init];
+    });
+    
+    return sharedInstance;
+    
+}
+
+
+
 @end

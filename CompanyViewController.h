@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class ProductViewController;
+@class AddNewCompanyViewController;
 
 @interface CompanyViewController : UITableViewController
 

@@ -7,6 +7,7 @@
 //
 
 #import "detailsViewController.h"
+#import "EditProductViewController.h"
 
 @interface detailsViewController ()
 
@@ -16,12 +17,27 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
+    // Set the item for navigation bar
+    // set the edit button on the right navigation bar
+    
+    UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editProductInfo)];
+    self.navigationItem.rightBarButtonItem = editButton;
+    
+    // set the back button image to the navigation bar
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"navBackButton"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonPressed)];
+    
+    self.navigationItem.leftBarButtonItem = backButton;
+    
+    // set title for the navigation controller
+    self.title = @"Product Link";
+    
+    
     
     // Set up WKWebview here
 
     self.view.frame = [[UIScreen mainScreen] bounds]; // set the view as the same size with screen
-    NSURL *url = [NSURL URLWithString:self.productUrl];
+    NSURL *url = [NSURL URLWithString:self.product.productUrl];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
     WKWebViewConfiguration *theConfiguration = [[WKWebViewConfiguration alloc] init];
@@ -35,6 +51,23 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)editProductInfo
+{
+    // Create the new view controller
+    EditProductViewController *editProductViewController = [[EditProductViewController alloc]initWithNibName:@"EditProductViewController" bundle:nil];
+    
+    // Create the product reference to the next view controller
+    editProductViewController.product = self.product;
+
+    
+    [self.navigationController pushViewController:editProductViewController animated:YES];
+}
+
+-(void)backButtonPressed
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 /*

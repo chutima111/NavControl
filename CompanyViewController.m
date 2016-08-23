@@ -11,6 +11,8 @@
 #import "companyInfoClass.h"
 #import "productClass.h"
 #import "DAO.h"
+#import "AddNewCompanyViewController.h"
+#import "EditCompanyViewController.h"
 
 @interface CompanyViewController ()
 
@@ -33,24 +35,50 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     // Uncomment the following line to preserve selection between presentations.
-     self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.clearsSelectionOnViewWillAppear = NO;
+    
+    
+    // Set the navigation bar
+    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    
+    // Add the addButton in navigation bar
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewCompany)];
+    
+    self.navigationItem.rightBarButtonItem = addButton;
+    
     // self.navigationController.navigationBar.hidden = NO;
     
-    self.title = @"Mobile device makers";
+    // Set the navigation bar to color
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:87.0/255 green:158.0/255 blue:38.0/255 alpha:1.0];
     
-    // ADD ALL THE COMPANIES 
+    // Set the navigation item to color
+    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
     
-    self.dao = [[DAO alloc]init];
+    // Set the navigation title
+    self.title = @"Watch List";
+    
+    // ADD ALL THE COMPANIES
+    
+    self.dao = [DAO sharedInstance];
     [self.dao createCompaniesAndProducts];
     self.companies = self.dao.companyList;
     
+    // Allow the select the cell during the editing mode
+    self.tableView.allowsSelectionDuringEditing = YES;
     
-            
+    
+    
+}
+
+
+
+-(void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -58,6 +86,22 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+-(void) setEditing:(BOOL)editing animated:(BOOL)animated
+{
+    // overide the edit navigationItem
+    [super setEditing:editing animated:animated];
+}
+
+-(void)insertNewCompany
+{
+    //Create the next view controller
+    AddNewCompanyViewController *addNewCompanyViewController = [[AddNewCompanyViewController alloc] initWithNibName:@"AddNewCompanyViewController" bundle:nil];
+    
+    // Push the view controller
+    [self.navigationController pushViewController:addNewCompanyViewController animated:YES];
+}
+
 
 #pragma mark - Table view data source
 
@@ -83,26 +127,38 @@
     
     // Configure the cell...
     companyInfoClass *company = [self.companies objectAtIndex:[indexPath row]];
-
+    
     
     cell.textLabel.text = company.companyName;
     cell.imageView.image = [UIImage imageNamed:company.companyImageName];
+    cell.detailTextLabel.text = @"my stock price";
+    
+    // cell.imageView.image will be nil because it can not find the mathch in Images.xcassets
+    // then we search through the document directory
+    
+    if (cell.imageView.image == nil) {
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        NSString *path = [documentsDirectory stringByAppendingPathComponent:company.companyName];
+        UIImage *image = [UIImage imageWithContentsOfFile:path];
+        
+        cell.imageView.image = image;
+    }
     
     // ADD accessory type to be able to edit the cell
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    
     
     return cell;
 }
 
 /*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
+ // Override to support conditional editing of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ // Return NO if you do not want the specified item to be editable.
+ return YES;
+ }
+ */
 
 
 // Override to support editing the table view.
@@ -111,11 +167,11 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
         [self.companies removeObjectAtIndex:indexPath.row];
-  
-         
-     [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         
-    }   
+        
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        
+    }
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }
@@ -150,25 +206,34 @@
 // In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    // if tabel view is on editing mode
+    // I want to be able to select the cell and do something with it
+    if (tableView.editing == YES) {
+        
+        companyInfoClass *company = self.companies[indexPath.row];
+        
+        // Create the next view controller
+        EditCompanyViewController *editCompanyViewController = [[EditCompanyViewController alloc]initWithNibName:@"EditCompanyViewController" bundle:nil];
+        
+        // Pass the company information to the next view controller
+        editCompanyViewController.title = company.companyName;
+        editCompanyViewController.company = company;
+        
+        [self.navigationController pushViewController:editCompanyViewController animated:YES];
+        
+        
+    } else {
+        
+        // if the table view is not on editing mode do something when the select the cell
+        companyInfoClass *company = self.companies[indexPath.row];
+        self.productViewController.title = company.companyName;
+        self.productViewController.company = company;
+        
+        
+        [self.navigationController pushViewController:self.productViewController animated:YES];
+    }
     
-    /*    if (indexPath.row == 0){
-     self.productViewController.title = @"Apple mobile devices";
-     } else {
-     self.productViewController.title = @"Samsung mobile devices";
-     }
-     */
-    
-    companyInfoClass *company = self.companies[indexPath.row];
-    self.productViewController.title = company.companyName; //@"Apple mobile devices";
-    self.productViewController.products = company.productsArray;
-    
-    [self.navigationController
-        pushViewController:self.productViewController
-        animated:YES];
-    
-
 }
- 
 
 
 @end

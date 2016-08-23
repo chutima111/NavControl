@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "detailsViewController.h"
+#import "companyInfoClass.h"
 
 
 @interface ProductViewController : UITableViewController
-@property (nonatomic, retain) NSMutableArray *products;
-@property (nonatomic, retain) NSMutableArray *productImages;
-@property (nonatomic, retain) NSMutableArray *productUrlsArray;
+
+@property (nonatomic, strong) companyInfoClass *company;
+
 @end

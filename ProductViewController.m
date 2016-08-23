@@ -8,6 +8,8 @@
 
 #import "ProductViewController.h"
 #import "productClass.h"
+#import "AddNewProductViewController.h"
+
 
 
 
@@ -33,12 +35,21 @@
 
     // Uncomment the following line to preserve selection between presentations.
      self.clearsSelectionOnViewWillAppear = NO;
+    
+    // Set the navigation bar
+    
+    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    
+    // Add the backButton on the left side of navigation bar
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"navBackButton"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonPressed)];
+    self.navigationItem.leftBarButtonItem = backButton;
+    
+    // Add the addButton in navigation bar
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewProduct)];
+    
+    self.navigationItem.rightBarButtonItem = addButton;
  
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    
-}
+   }
 
 - (void)viewWillAppear:(BOOL)animated {
     
@@ -55,6 +66,28 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void) setEditing:(BOOL)editing animated:(BOOL)animated
+{
+    // overide the edit navigationItem
+    [super setEditing:editing animated:animated];
+}
+
+-(void)insertNewProduct
+{
+    // Create the next view controller
+    AddNewProductViewController *addNewProductViewController = [[AddNewProductViewController alloc]initWithNibName:@"AddNewProductViewController" bundle:nil];
+    
+    addNewProductViewController.company = self.company;
+    
+    [self.navigationController pushViewController:addNewProductViewController animated:YES];
+    
+}
+
+-(void)backButtonPressed
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -66,7 +99,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [self.products count];
+    return [self.company.productsArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -77,10 +110,23 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     // Configure the cell...
-    productClass *product = [self.products objectAtIndex:indexPath.row];
+    productClass *product = [self.company.productsArray objectAtIndex:indexPath.row];
     
     cell.textLabel.text = product.productName;
     cell.imageView.image = [UIImage imageNamed:product.productImage];
+    
+    // cell.imageView.image will be nil because it can not find the mathch in Images.xcassets
+    // then we search through the document directory
+    
+    if (cell.imageView.image == nil) {
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        NSString *path = [documentsDirectory stringByAppendingPathComponent:product.productName];
+        UIImage *image = [UIImage imageWithContentsOfFile:path];
+        
+        cell.imageView.image = image;
+    }
+
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     return cell;
@@ -99,8 +145,11 @@
     
 
     // Pass the selected object to the new view controller.
-    productClass *product = self.products[indexPath.row];
-       detailViewController.productUrl = product.productUrl;
+    productClass *product = self.company.productsArray[indexPath.row];
+    
+    // Create the product reference to the new view controller
+    detailViewController.product = product;
+    
     
     
     // Push the view controller.
@@ -124,7 +173,7 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        [self.products removeObjectAtIndex:indexPath.row];
+        [self.company.productsArray removeObjectAtIndex:indexPath.row];
         
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }   
@@ -139,9 +188,9 @@
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
-    productClass *product = self.products[fromIndexPath.row];
-    [self.products removeObject:product];
-     [self.products insertObject:product atIndex:toIndexPath.row];
+    productClass *product = self.company.productsArray[fromIndexPath.row];
+    [self.company.productsArray removeObject:product];
+     [self.company.productsArray insertObject:product atIndex:toIndexPath.row];
 }
 
 

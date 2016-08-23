@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddNewProductViewController">
+            <connections>
+                <outlet property="txfProductImageURL" destination="WVZ-cO-15r" id="trj-mE-Hue"/>
+                <outlet property="txfProductName" destination="ya0-65-RmZ" id="9mj-jx-rPL"/>
+                <outlet property="txfProductURL" destination="XO8-g5-OAc" id="QXH-XS-eoh"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="377" height="484"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Product URL" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XO8-g5-OAc">
+                    <rect key="frame" x="20" y="227" width="337" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Product Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ya0-65-RmZ">
+                    <rect key="frame" x="20" y="167" width="337" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Product Image URL" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WVZ-cO-15r">
+                    <rect key="frame" x="20" y="287" width="337" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="WVZ-cO-15r" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="DO4-Pn-njp"/>
+                <constraint firstAttribute="trailing" secondItem="XO8-g5-OAc" secondAttribute="trailing" constant="20" id="Fia-iT-F8J"/>
+                <constraint firstItem="XO8-g5-OAc" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="LGC-hQ-6yw"/>
+                <constraint firstItem="WVZ-cO-15r" firstAttribute="top" secondItem="XO8-g5-OAc" secondAttribute="bottom" constant="30" id="R6X-nP-uZx"/>
+                <constraint firstItem="ya0-65-RmZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="S7d-al-O7Z"/>
+                <constraint firstAttribute="trailing" secondItem="WVZ-cO-15r" secondAttribute="trailing" constant="20" id="bA0-P2-epL"/>
+                <constraint firstItem="XO8-g5-OAc" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="fRL-gh-vvN"/>
+                <constraint firstItem="XO8-g5-OAc" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="gwF-jD-0ru"/>
+                <constraint firstItem="XO8-g5-OAc" firstAttribute="top" secondItem="ya0-65-RmZ" secondAttribute="bottom" constant="30" id="nGc-dK-OzB"/>
+                <constraint firstAttribute="trailing" secondItem="ya0-65-RmZ" secondAttribute="trailing" constant="20" id="qT0-hh-Ewa"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="gwF-jD-0ru"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="160.5" y="215"/>
+        </view>
+    </objects>
+</document>

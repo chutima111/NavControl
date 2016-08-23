@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EditProductViewController">
+            <connections>
+                <outlet property="txfProductImageURL" destination="OFo-3f-QCs" id="3dp-62-Lqt"/>
+                <outlet property="txfProductName" destination="xkb-vQ-NDJ" id="n4a-ce-CHF"/>
+                <outlet property="txfProductURL" destination="54n-iZ-JGq" id="3oT-AK-WBC"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="410" height="485"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Product Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xkb-vQ-NDJ">
+                    <rect key="frame" x="20" y="128" width="370" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Product URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="54n-iZ-JGq">
+                    <rect key="frame" x="20" y="178" width="370" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Product Image URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OFo-3f-QCs">
+                    <rect key="frame" x="20" y="228" width="370" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F9s-P5-gCx">
+                    <rect key="frame" x="177" y="308" width="56" height="34"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="18"/>
+                    <state key="normal" title="Delete">
+                        <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="deleteButtonPressed:" destination="-1" eventType="touchUpInside" id="2gc-xX-svF"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="54n-iZ-JGq" firstAttribute="top" secondItem="xkb-vQ-NDJ" secondAttribute="bottom" constant="20" id="86S-wH-OgJ"/>
+                <constraint firstItem="OFo-3f-QCs" firstAttribute="top" secondItem="54n-iZ-JGq" secondAttribute="bottom" constant="20" id="BUH-fF-aJI"/>
+                <constraint firstAttribute="trailing" secondItem="54n-iZ-JGq" secondAttribute="trailing" constant="20" id="ISK-ix-VCD"/>
+                <constraint firstItem="OFo-3f-QCs" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="Iyd-dz-N64"/>
+                <constraint firstItem="OFo-3f-QCs" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="JcK-Wf-O5B"/>
+                <constraint firstAttribute="trailing" secondItem="OFo-3f-QCs" secondAttribute="trailing" constant="20" id="QgP-i1-2ni"/>
+                <constraint firstAttribute="trailing" secondItem="xkb-vQ-NDJ" secondAttribute="trailing" constant="20" id="Xih-hf-b5A"/>
+                <constraint firstItem="F9s-P5-gCx" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="fOy-Cr-Dfc"/>
+                <constraint firstItem="F9s-P5-gCx" firstAttribute="top" secondItem="OFo-3f-QCs" secondAttribute="bottom" constant="50" id="uJm-4V-Bjq"/>
+                <constraint firstItem="54n-iZ-JGq" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="xTG-IU-tWz"/>
+                <constraint firstItem="xkb-vQ-NDJ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="yDr-FM-2it"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="262" y="214.5"/>
+        </view>
+    </objects>
+</document>
