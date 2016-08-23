@@ -164,6 +164,17 @@
     
 }
 
+-(void)updateProductInfo:(NSString *)productName
+        updateProductURL:(NSString *)productURL
+   updateProductImageURL:(NSString *)productImageURL
+             productInfo:(productClass *)productInfo
+{
+    productInfo.productName = productName;
+    productInfo.productUrl = productURL;
+    productInfo.productImage = productImageURL;
+}
+
+
 
 +(DAO *)sharedInstance
 {

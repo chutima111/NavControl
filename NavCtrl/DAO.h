@@ -29,6 +29,11 @@
    updateCompanyImageURL:(NSString *)companyImageURL
                  company:(companyInfoClass *)company;
 
+-(void)updateProductInfo:(NSString *)productName
+        updateProductURL:(NSString *)productURL
+   updateProductImageURL:(NSString *)productImageURL
+             productInfo:(productClass *)productInfo;
+
 +(DAO *)sharedInstance;
 
 

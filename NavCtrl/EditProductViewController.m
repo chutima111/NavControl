@@ -7,6 +7,7 @@
 //
 
 #import "EditProductViewController.h"
+#import "DAO.h"
 
 @interface EditProductViewController () <UITextFieldDelegate>
 
@@ -94,10 +95,10 @@
 
 -(void)saveProductInfo
 {
-    [self updateProductInfo:self.txfProductName.text
-           updateProductURL:self.txfProductURL.text
-      updateProductImageURL:self.txfProductImageURL.text
-                productInfo:self.product];
+    [[DAO sharedInstance] updateProductInfo:self.txfProductName.text
+                           updateProductURL:self.txfProductURL.text
+                      updateProductImageURL:self.txfProductImageURL.text
+                                productInfo:self.product];
     
     //Save the image from URL to temp directory
     // Using NSURLSessionDownloadTask
@@ -130,15 +131,20 @@
     
 }
 
--(void)updateProductInfo:(NSString *)productName
-        updateProductURL:(NSString *)productURL
-   updateProductImageURL:(NSString *)productImageURL
-             productInfo:(productClass *)productInfo
+- (void)UITextFieldClearAll
 {
-    productInfo.productName = productName;
-    productInfo.productUrl = productURL;
-    productInfo.productImage = productImageURL;
+    for (UIView *view in [self.view subviews]) {
+        if ([view isKindOfClass:[UITextField class]]) {
+            UITextField *textField = (UITextField *)view;
+            textField.text = @"";
+        }
+    }
 }
+- (IBAction)deleteButtonPressed:(id)sender {
+    
+    [self UITextFieldClearAll];
+}
+
 
 /*
 #pragma mark - Navigation

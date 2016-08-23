@@ -135,6 +135,20 @@
     return YES;
 }
 
+- (void)UITextFieldClearAll
+{
+    for (UIView *view in [self.view subviews]) {
+        if ([view isKindOfClass:[UITextField class]]) {
+            UITextField *textField = (UITextField *)view;
+            textField.text = @"";
+        }
+    }
+}
+
+- (IBAction)deleteButtonPressed:(id)sender {
+    
+    [self UITextFieldClearAll];
+}
 
 /*
 #pragma mark - Navigation
