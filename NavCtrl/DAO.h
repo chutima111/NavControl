@@ -8,10 +8,28 @@
 
 #import <Foundation/Foundation.h>
 
+@class companyInfoClass;
+@class productClass;
+
 @interface DAO : NSObject
 
 @property (nonatomic,strong) NSMutableArray *companyList;
 
 -(void)createCompaniesAndProducts;
+-(void)addNewCompanyToList:(NSString *)companyName
+              companyImage:(NSString *)companyImage
+             productsArray:(NSMutableArray *)productsArray;
+
+-(void)addNewProductToList:(NSString *)productName
+           productImageURL:(NSString *)productImageURL
+                productURL:(NSString *)productURL
+               companyInfo:(companyInfoClass *)companyInfo;
+
+-(void)updateCompanyInfo:(NSString *)companyName
+   updateCompanyImageURL:(NSString *)companyImageURL
+                 company:(companyInfoClass *)company;
+
++(DAO *)sharedInstance;
+
 
 @end
