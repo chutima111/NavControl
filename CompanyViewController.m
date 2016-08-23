@@ -131,6 +131,7 @@
     
     cell.textLabel.text = company.companyName;
     cell.imageView.image = [UIImage imageNamed:company.companyImageName];
+    cell.detailTextLabel.text = @"my stock price";
     
     // cell.imageView.image will be nil because it can not find the mathch in Images.xcassets
     // then we search through the document directory
