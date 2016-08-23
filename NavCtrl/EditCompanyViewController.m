@@ -21,10 +21,18 @@
     self.txfCompanyName.text = self.company.companyName;
     self.txfCompanyImageURL.text = self.company.companyImageName;
     
+    // set the title for navigation controller
+    self.title = @"Edit Company";
+    
     // Add the save button on the right side of navigation bar
     UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveCompany)];
     
     self.navigationItem.rightBarButtonItem = saveButton;
+    
+    // Add the cancle button on the left
+    UIBarButtonItem *cancleButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonPressed)];
+    
+    self.navigationItem.leftBarButtonItem = cancleButton;
     
     // register for keyboard notifications
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -76,6 +84,11 @@
                                            self.txfCompanyImageURL.frame.size.height);
     
 
+}
+
+-(void)cancelButtonPressed
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)saveCompany

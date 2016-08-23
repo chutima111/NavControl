@@ -33,6 +33,11 @@
     UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveNewProduct)];
     
     self.navigationItem.rightBarButtonItem = saveButton;
+    
+    // Add back button image on navigation bar on the left
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"navBackButton"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonPressed)];
+    
+    self.navigationItem.leftBarButtonItem = backButton;
 
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -82,6 +87,11 @@
 {
     [textField resignFirstResponder];
     return YES;
+}
+
+-(void)backButtonPressed
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)saveNewProduct

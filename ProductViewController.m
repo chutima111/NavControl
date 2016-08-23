@@ -41,7 +41,7 @@
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
     // Add the backButton on the left side of navigation bar
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc]initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backBarPressed)];
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"navBackButton"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonPressed)];
     self.navigationItem.leftBarButtonItem = backButton;
     
     // Add the addButton in navigation bar
@@ -83,7 +83,7 @@
     
 }
 
--(void)backBarPressed
+-(void)backButtonPressed
 {
     [self.navigationController popViewControllerAnimated:YES];
 }

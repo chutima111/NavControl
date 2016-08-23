@@ -25,6 +25,11 @@
     
     self.navigationItem.rightBarButtonItem = saveButton;
     
+    // set cancel button on the left
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonPressed)];
+    
+    self.navigationItem.leftBarButtonItem = cancelButton;
+    
     // Set up the text field
     self.txfProductName.text = self.product.productName;
     self.txfProductURL.text = self.product.productUrl;
@@ -80,6 +85,11 @@
                                                self.txfProductImageURL.frame.size.height);
     
 
+}
+
+-(void)cancelButtonPressed
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)saveProductInfo

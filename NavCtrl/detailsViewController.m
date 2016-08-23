@@ -24,6 +24,14 @@
     UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editProductInfo)];
     self.navigationItem.rightBarButtonItem = editButton;
     
+    // set the back button image to the navigation bar
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"navBackButton"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonPressed)];
+    
+    self.navigationItem.leftBarButtonItem = backButton;
+    
+    // set title for the navigation controller
+    self.title = @"Product Link";
+    
     
     
     // Set up WKWebview here
@@ -55,6 +63,11 @@
 
     
     [self.navigationController pushViewController:editProductViewController animated:YES];
+}
+
+-(void)backButtonPressed
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 /*
