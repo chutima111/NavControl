@@ -13,6 +13,7 @@
 
 @property (retain, nonatomic) IBOutlet UITextField *txfCompanyName;
 @property (retain, nonatomic) IBOutlet UITextField *txfCompanyImageUrl;
+@property (retain, nonatomic) IBOutlet UITextField *txfCompanyTicker;
 
 
 @end

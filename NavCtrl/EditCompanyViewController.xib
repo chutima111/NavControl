@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="txfCompanyImageURL" destination="d3C-jR-1LH" id="Ngq-2z-zE5"/>
                 <outlet property="txfCompanyName" destination="1Tq-pq-8Pj" id="c98-iD-1GB"/>
+                <outlet property="txfCompanyTicker" destination="dUd-fE-927" id="rtG-c7-5FY"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -18,12 +19,17 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Company Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1Tq-pq-8Pj">
-                    <rect key="frame" x="20" y="189" width="391" height="30"/>
+                    <rect key="frame" x="20" y="139" width="391" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Company Image URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="d3C-jR-1LH">
                     <rect key="frame" x="20" y="239" width="391" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Company Ticker" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dUd-fE-927">
+                    <rect key="frame" x="20" y="189" width="391" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
@@ -40,16 +46,29 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="d3C-jR-1LH" firstAttribute="top" secondItem="dUd-fE-927" secondAttribute="bottom" constant="20" id="0YJ-02-5ez"/>
                 <constraint firstItem="h3P-Tr-WM8" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="2K8-VO-tep"/>
+                <constraint firstAttribute="trailing" secondItem="dUd-fE-927" secondAttribute="trailing" constant="20" id="3Wh-AT-sX5"/>
                 <constraint firstAttribute="trailing" secondItem="d3C-jR-1LH" secondAttribute="trailing" constant="20" id="45U-xR-GF8"/>
+                <constraint firstAttribute="trailing" secondItem="1Tq-pq-8Pj" secondAttribute="trailing" constant="20" id="6KT-pR-1oq"/>
+                <constraint firstItem="dUd-fE-927" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="FD6-M7-yOk"/>
                 <constraint firstAttribute="trailing" secondItem="1Tq-pq-8Pj" secondAttribute="trailing" constant="20" id="GX3-fC-ic4"/>
+                <constraint firstItem="dUd-fE-927" firstAttribute="top" secondItem="1Tq-pq-8Pj" secondAttribute="bottom" constant="20" id="RvB-eg-jIi"/>
                 <constraint firstItem="d3C-jR-1LH" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="VRD-BF-AQs"/>
                 <constraint firstItem="d3C-jR-1LH" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="Vw9-dt-PZd"/>
                 <constraint firstItem="d3C-jR-1LH" firstAttribute="top" secondItem="1Tq-pq-8Pj" secondAttribute="bottom" constant="20" id="c9b-HO-8va"/>
                 <constraint firstItem="h3P-Tr-WM8" firstAttribute="top" secondItem="d3C-jR-1LH" secondAttribute="bottom" constant="50" id="k5m-qK-y7m"/>
+                <constraint firstItem="1Tq-pq-8Pj" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="me0-lx-cti"/>
                 <constraint firstItem="1Tq-pq-8Pj" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="nS1-0y-C1V"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="GX3-fC-ic4"/>
+                    <exclude reference="nS1-0y-C1V"/>
+                    <exclude reference="c9b-HO-8va"/>
+                </mask>
+            </variation>
             <point key="canvasLocation" x="159.5" y="251.5"/>
         </view>
     </objects>

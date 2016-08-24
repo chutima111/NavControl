@@ -18,6 +18,7 @@
 -(void)createCompaniesAndProducts;
 -(void)addNewCompanyToList:(NSString *)companyName
               companyImage:(NSString *)companyImage
+             companyTicker:(NSString *)companyTicker
              productsArray:(NSMutableArray *)productsArray;
 
 -(void)addNewProductToList:(NSString *)productName
@@ -27,6 +28,7 @@
 
 -(void)updateCompanyInfo:(NSString *)companyName
    updateCompanyImageURL:(NSString *)companyImageURL
+     updateCompanyTicker:(NSString *)companyTicker
                  company:(companyInfoClass *)company;
 
 -(void)updateProductInfo:(NSString *)productName

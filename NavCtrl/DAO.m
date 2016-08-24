@@ -17,6 +17,7 @@
     companyInfoClass *apple = [[companyInfoClass alloc]init];
     apple.companyName = @"Apple mobile devices";
     apple.companyImageName = @"apple company logo";
+    apple.companyTicker = @"AAPL";
     apple.productsArray = [NSMutableArray array];
     
     productClass *iPhone = [[productClass alloc] init];
@@ -43,6 +44,7 @@
     companyInfoClass *samsung = [[companyInfoClass alloc] init];
     samsung.companyName = @"Samsung mobile devices";
     samsung.companyImageName = @"samsung company logo";
+    samsung.companyTicker = @"SSNLF";
     samsung.productsArray = [NSMutableArray array];
     
     productClass *samsungGalaxyS4 = [[productClass alloc] init];
@@ -68,6 +70,7 @@
     companyInfoClass *lg = [[companyInfoClass alloc] init];
     lg.companyName = @"LG mobile devices";
     lg.companyImageName = @"LG company logo";
+    lg.companyTicker = @"LGEAF";
     lg.productsArray = [NSMutableArray array];
     
     // List LG products (LG Phone, LG Tablet, LG Watch)
@@ -95,6 +98,7 @@
     companyInfoClass *htc = [[companyInfoClass alloc]init];
     htc.companyName = @"HTC mobile devices";
     htc.companyImageName = @"htc company logo";
+    htc.companyTicker = @"2498.TW";
     htc.productsArray = [NSMutableArray array];
     
     // List HTC products (htc desire, htc One A9, htc Evo)
@@ -130,11 +134,13 @@
 
 -(void)addNewCompanyToList:(NSString *)companyName
               companyImage:(NSString *)companyImage
+             companyTicker:(NSString *)companyTicker
              productsArray:(NSMutableArray *)productsArray
 {
     companyInfoClass *companyInfo = [[companyInfoClass alloc] init];
     companyInfo.companyName = companyName;
     companyInfo.companyImageName = companyImage;
+    companyInfo.companyTicker = companyTicker;
     companyInfo.productsArray = productsArray;
     [self.companyList addObject:companyInfo];
 }
@@ -157,10 +163,12 @@
 
 -(void)updateCompanyInfo:(NSString *)companyName
    updateCompanyImageURL:(NSString *)companyImageURL
+     updateCompanyTicker:(NSString *)companyTicker
                  company:(companyInfoClass *)company
 {
     company.companyName = companyName;
     company.companyImageName = companyImageURL;
+    company.companyTicker = companyTicker;
     
 }
 

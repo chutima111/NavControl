@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="txfCompanyImageUrl" destination="M7d-SA-oOt" id="c2h-CU-Anf"/>
                 <outlet property="txfCompanyName" destination="PM8-bB-SLw" id="VXe-dm-8xE"/>
+                <outlet property="txfCompanyTicker" destination="Lhh-yL-jPi" id="oKk-2V-gQI"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -33,13 +34,21 @@
                         <outlet property="delegate" destination="-1" id="qJa-lG-18v"/>
                     </connections>
                 </textField>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Company Ticker" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Lhh-yL-jPi">
+                    <rect key="frame" x="30" y="353" width="380" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="M7d-SA-oOt" secondAttribute="trailing" constant="30" id="D72-Os-IGg"/>
                 <constraint firstItem="PM8-bB-SLw" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="30" id="TXu-KX-kfN"/>
                 <constraint firstItem="M7d-SA-oOt" firstAttribute="leading" secondItem="PM8-bB-SLw" secondAttribute="leading" id="Vnt-8b-xNs"/>
+                <constraint firstItem="Lhh-yL-jPi" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="30" id="WAZ-l7-YGo"/>
                 <constraint firstAttribute="trailing" secondItem="PM8-bB-SLw" secondAttribute="trailing" constant="30" id="YbQ-dD-qCM"/>
+                <constraint firstItem="Lhh-yL-jPi" firstAttribute="top" secondItem="M7d-SA-oOt" secondAttribute="bottom" constant="30" id="aqr-QU-qXb"/>
+                <constraint firstAttribute="trailing" secondItem="Lhh-yL-jPi" secondAttribute="trailing" constant="30" id="gYk-lB-PXB"/>
                 <constraint firstItem="PM8-bB-SLw" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="j8p-6r-ElR"/>
                 <constraint firstItem="M7d-SA-oOt" firstAttribute="top" secondItem="PM8-bB-SLw" secondAttribute="bottom" constant="30" id="mRL-qN-Qq8"/>
                 <constraint firstItem="M7d-SA-oOt" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="30" id="xfa-zp-rM0"/>

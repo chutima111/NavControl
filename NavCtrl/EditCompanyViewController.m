@@ -20,6 +20,7 @@
     
     self.txfCompanyName.text = self.company.companyName;
     self.txfCompanyImageURL.text = self.company.companyImageName;
+    self.txfCompanyTicker.text = self.company.companyTicker;
     
     // set the title for navigation controller
     self.title = @"Edit Company";
@@ -49,7 +50,7 @@
     // set the delegate to my text fields
     self.txfCompanyName.delegate = self;
     self.txfCompanyImageURL.delegate = self;
-
+    self.txfCompanyTicker.delegate = self;
     
 }
 
@@ -96,6 +97,7 @@
     
     [[DAO sharedInstance] updateCompanyInfo:self.txfCompanyName.text
                       updateCompanyImageURL:self.txfCompanyImageURL.text
+                        updateCompanyTicker:self.txfCompanyTicker.text
                                     company:self.company];
     
     // Save the image from URL to temp directory
@@ -163,6 +165,7 @@
 - (void)dealloc {
     [_txfCompanyName release];
     [_txfCompanyImageURL release];
+    [_txfCompanyTicker release];
     [super dealloc];
 }
 @end

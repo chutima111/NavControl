@@ -50,6 +50,7 @@
     // Set delegate to my text fields
     self.txfCompanyName.delegate = self;
     self.txfCompanyImageUrl.delegate = self;
+    self.txfCompanyTicker.delegate = self;
     
 }
 
@@ -98,6 +99,7 @@
 {
     [[DAO sharedInstance] addNewCompanyToList:self.txfCompanyName.text
                                  companyImage:self.txfCompanyImageUrl.text
+                                companyTicker:self.txfCompanyTicker.text
                                 productsArray:[NSMutableArray array]];
     
     
@@ -154,6 +156,7 @@
 - (void)dealloc {
     [_txfCompanyName release];
     [_txfCompanyImageUrl release];
+    [_txfCompanyTicker release];
     [super dealloc];
 }
 @end
