@@ -40,97 +40,94 @@
     [apple.productsArray addObject:iPad];
     [apple.productsArray addObject:iPod];
     
-    // GROUP SAMSUNG COMPANY AND ITS PRODUCT
-    companyInfoClass *samsung = [[companyInfoClass alloc] init];
-    samsung.companyName = @"Samsung mobile devices";
-    samsung.companyImageName = @"samsung company logo";
-    samsung.companyTicker = @"SSNLF";
-    samsung.productsArray = [NSMutableArray array];
     
-    productClass *samsungGalaxyS4 = [[productClass alloc] init];
-    samsungGalaxyS4.productName = @"Samsung Galaxy S4";
-    samsungGalaxyS4.productImage = @"samsung galaxy s4 pic";
-    samsungGalaxyS4.productUrl = @"http://www.samsung.com/us/mobile/phones/galaxy-s/samsung-galaxy-s4-prepaid-verizon-black-sch-i545zkpvzw/";
+    // GROUP GOOGLE COMPANY AND ITS PRODUCTS
+    companyInfoClass *google = [[companyInfoClass alloc] init];
+    google.companyName = @"Google";
+    google.companyImageName = @"googleLogoImage";
+    google.companyTicker = @"GOOG";
+    google.productsArray = [NSMutableArray array];
     
-    productClass *samsungGalaxyNote = [[productClass alloc] init];
-    samsungGalaxyNote.productName = @"Samsung Galaxy Note";
-    samsungGalaxyNote.productImage = @"samsung galaxy note pic";
-    samsungGalaxyNote.productUrl = @"http://www.samsung.com/us/mobile/phones/galaxy-note/samsung-galaxy-note5-32gb-t-mobile-black-sapphire-sm-n920tzkatmb/";
+    productClass *googleGmail = [[productClass alloc]init];
+    googleGmail.productName = @"Gmail";
+    googleGmail.productImage = @"gmailLogoImage";
+    googleGmail.productUrl = @"https://www.google.com/gmail/about/";
     
-    productClass *samsungGalaxyTap = [[productClass alloc]init];
-    samsungGalaxyTap.productName = @"Samsung Galaxy Tap";
-    samsungGalaxyTap.productImage = @"samsung tap pic";
-    samsungGalaxyTap.productUrl = @"http://www.samsung.com/us/mobile/tablets/all-other-tablets/samsung-galaxy-tab-4-10-1-16gb-wi-fi-black-sm-t530nyksxar/";
-    // ADD SAMSUNG product into samsung company
-    [samsung.productsArray addObject:samsungGalaxyS4];
-    [samsung.productsArray addObject:samsungGalaxyNote];
-    [samsung.productsArray addObject:samsungGalaxyTap];
+    productClass *googleMaps = [[productClass alloc]init];
+    googleMaps.productName = @"Google Maps";
+    googleMaps.productImage = @"googleMapsLogoImage";
+    googleMaps.productUrl = @"https://maps.google.com/";
     
-    // GROUP LG COMPANY AND ITS PRODUCT
-    companyInfoClass *lg = [[companyInfoClass alloc] init];
-    lg.companyName = @"LG mobile devices";
-    lg.companyImageName = @"LG company logo";
-    lg.companyTicker = @"LGEAF";
-    lg.productsArray = [NSMutableArray array];
+    // Add google products into Google company
+    [google.productsArray addObject:googleGmail];
+    [google.productsArray addObject:googleMaps];
     
-    // List LG products (LG Phone, LG Tablet, LG Watch)
-    productClass *lgPhone = [[productClass alloc]init];
-    lgPhone.productName = @"LG Phone";
-    lgPhone.productImage = @"LG phone pic";
-    lgPhone.productUrl = @"http://www.lg.com/us/cell-phones";
+    // GROUP TESLA COMPANY AND ITS PRODUCTS
+    companyInfoClass *tesla = [[companyInfoClass alloc]init];
+    tesla.companyName = @"Tesla";
+    tesla.companyImageName = @"teslaLogoImage";
+    tesla.companyTicker = @"TSLA";
+    tesla.productsArray = [NSMutableArray array];
     
-    productClass *lgTablet = [[productClass alloc]init];
-    lgTablet.productName = @"LG Tablet";
-    lgTablet.productImage = @"LG pad pic";
-    lgTablet.productUrl = @"http://www.lg.com/us/tablets";
+    productClass *teslaModelS = [[productClass alloc]init];
+    teslaModelS.productName = @"Model S";
+    teslaModelS.productImage = @"teslaModelSImage";
+    teslaModelS.productUrl = @"https://www.tesla.com/models";
     
-    productClass *lgWatch = [[productClass alloc]init];
-    lgWatch.productName = @"LG Watch";
-    lgWatch.productImage = @"LG watch pic";
-    lgWatch.productUrl = @"http://www.lg.com/us/smart-watches";
+    productClass *teslaModelX = [[productClass alloc] init];
+    teslaModelX.productName = @"Model X";
+    teslaModelX.productImage = @"teslaModelXImage";
+    teslaModelX.productUrl = @"https://www.tesla.com/modelx";
     
-    // Add LG product to LG company
-    [lg.productsArray addObject:lgPhone];
-    [lg.productsArray addObject:lgTablet];
-    [lg.productsArray addObject:lgWatch];
+    productClass *teslaModel3 = [[productClass alloc] init];
+    teslaModel3.productName = @"Model 3";
+    teslaModel3.productImage = @"teslaModel3Image";
+    teslaModel3.productUrl = @"https://www.tesla.com/model3";
     
-    // GROUP HTC COMPANY AND ITS PRODUCTS
-    companyInfoClass *htc = [[companyInfoClass alloc]init];
-    htc.companyName = @"HTC mobile devices";
-    htc.companyImageName = @"htc company logo";
-    htc.companyTicker = @"2498.TW";
-    htc.productsArray = [NSMutableArray array];
+    // Add Tesla products into Tesla company
+    [tesla.productsArray addObject:teslaModelS];
+    [tesla.productsArray addObject:teslaModelX];
+    [tesla.productsArray addObject:teslaModel3];
     
-    // List HTC products (htc desire, htc One A9, htc Evo)
-    productClass *htcDesire = [[productClass alloc]init];
-    htcDesire.productName = @"htc Desire";
-    htcDesire.productImage = @"htc desire";
-    htcDesire.productUrl = @"http://www.htc.com/us/smartphones/htc-desire/";
+    // GROUP FORD COMPANY AND ITS PRODUCTS
+    companyInfoClass *ford = [[companyInfoClass alloc] init];
+    ford.companyName = @"Ford";
+    ford.companyImageName = @"fordLogoImage";
+    ford.companyTicker = @"F";
+    ford.productsArray = [NSMutableArray array];
     
-    productClass *htcOne = [[productClass alloc]init];
-    htcOne.productName = @"htc One";
-    htcOne.productImage = @"htc one";
-    htcOne.productUrl = @"http://www.htc.com/us/smartphones/htc-one-a9/";
+    productClass *fordFiesta = [[productClass alloc]init];
+    fordFiesta.productName = @"Fiesta";
+    fordFiesta.productImage = @"fordFiestaImage";
+    fordFiesta.productUrl = @"http://www.ford.com/cars/fiesta/";
     
-    productClass *htcEvo = [[productClass alloc]init];
-    htcEvo.productName = @"htc Evo";
-    htcEvo.productImage = @"htc evo";
-    htcEvo.productUrl = @"http://www.htc.com/us/smartphones/htc-evo-4g-lte/";
+    productClass *fordFocus = [[productClass alloc]init];
+    fordFocus.productName = @"Focus";
+    fordFocus.productImage = @"fordFocusImage";
+    fordFocus.productUrl = @"http://www.ford.com/cars/focus/";
     
-    // Add the htc products to the HTC company
-    [htc.productsArray addObject:htcDesire];
-    [htc.productsArray addObject:htcOne];
-    [htc.productsArray addObject:htcEvo];
+    productClass *fordMustang = [[productClass alloc]init];
+    fordMustang.productName = @"Mustang";
+    fordMustang.productImage = @"fordMustangImage";
+    fordMustang.productUrl = @"http://www.ford.com/cars/mustang/";
+    
+    // Add ford products to the company
+    [ford.productsArray addObject:fordFiesta];
+    [ford.productsArray addObject:fordFocus];
+    [ford.productsArray addObject:fordMustang];
+    
+    
     
     self.companyList = [NSMutableArray array];
     
     // ADD ALL COMPANYS TO COMPANY ARRAY
     [self.companyList addObject:apple];
-    [self.companyList addObject:samsung];
-    [self.companyList addObject:lg];
-    [self.companyList addObject:htc];
-
-}
+    [self.companyList addObject:google];
+    [self.companyList addObject:tesla];
+    [self.companyList addObject:ford];
+    
+    
+   }
 
 -(void)addNewCompanyToList:(NSString *)companyName
               companyImage:(NSString *)companyImage
@@ -182,7 +179,74 @@
     productInfo.productImage = productImageURL;
 }
 
+-(void)getStockPrice
+{
+    NSString *urlStartString = @"http://finance.yahoo.com/d/quotes.csv?s=";
+    NSString *urlEndString = @"&f=sl1";
+    NSString *tickersString =@"";
+    NSString *urlStringWithTickers;
+    
+    int i = 0;
+    for (i = 0; i < [_companyList count]; i++) {
+        companyInfoClass *temp = _companyList[i];
+        NSString *tempTicker = temp.companyTicker;
+        
+        tickersString = [tickersString stringByAppendingString:tempTicker];
+        tickersString = [NSString stringWithFormat:@"%@+", tickersString];
+        
+    }
+    NSString *newTickerString = [tickersString substringToIndex:[tickersString length] -1];
+    
+//    NSString *urlStringWithTicker = @"http://finance.yahoo.com/d/quotes.csv?s=AAPL+GOOG+MSFT&f=sl1";
+    urlStringWithTickers = [NSString stringWithFormat:@"%@%@%@", urlStartString, newTickerString,urlEndString];
+    NSURL *url = [NSURL URLWithString:urlStringWithTickers];
+    NSURLSessionDownloadTask *downloadStockTask = [[NSURLSession sharedSession] downloadTaskWithURL:url completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
+        
+        NSData *data = [NSData dataWithContentsOfURL:location];
+        
+        NSString* newStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        
+        NSLog(@"result = %@", newStr);
+        
+        // Separate the string to get individual ticker and stock price
+        NSString *newStringWithOutQuotation = [newStr stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+        NSLog(@"%@", newStringWithOutQuotation);
+        
+        // Now put in array
+        NSArray *tickerAndPriceArray = [newStringWithOutQuotation componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@",\n"]];
+       
+        NSLog(@"%@", tickerAndPriceArray);
+        
+        for (int i = 0; i < [tickerAndPriceArray count]-1; i = i+2) {
+            NSString *ticker = tickerAndPriceArray[i];
+            companyInfoClass *company = [self findCompanyByTicker:ticker];
+            company.stockPrice = tickerAndPriceArray[i+1];
+        }
+        
+        // get the main thred
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+        // Post the notification when the data is done downloading
+        [[NSNotificationCenter defaultCenter]
+         postNotificationName:@"StockDataReceived"
+         object:self];
+        });
+    }];
 
+    [downloadStockTask resume];
+        
+    
+}
+
+-(companyInfoClass *)findCompanyByTicker:(NSString *)ticker
+{
+    for (companyInfoClass *company in self.companyList) {
+        if ([company.companyTicker isEqualToString:ticker])
+            return company;
+    }
+    
+    return nil;
+}
 
 +(DAO *)sharedInstance
 {

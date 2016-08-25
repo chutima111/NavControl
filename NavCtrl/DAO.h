@@ -36,6 +36,9 @@
    updateProductImageURL:(NSString *)productImageURL
              productInfo:(productClass *)productInfo;
 
+-(void)getStockPrice;
+
+
 +(DAO *)sharedInstance;
 
 

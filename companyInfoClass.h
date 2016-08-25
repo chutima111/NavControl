@@ -13,6 +13,7 @@
 @property (nonatomic, strong) NSString *companyName;
 @property (nonatomic, strong) NSString *companyImageName;
 @property (nonatomic, strong) NSString *companyTicker;
+@property (nonatomic, strong) NSString *stockPrice;
 @property (nonatomic, strong) NSMutableArray *productsArray;
 
 @end

@@ -68,11 +68,21 @@
     // Allow the select the cell during the editing mode
     self.tableView.allowsSelectionDuringEditing = YES;
     
+    // Listen to the post when data (Stock price) is done downloading
+    // And I want to refresh or reload table view to show the stock price
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(refreshData)
+                                                 name:@"StockDataReceived"
+                                               object:nil];
     
+    [self.dao getStockPrice];
     
 }
 
-
+-(void)refreshData
+{
+    [self.tableView reloadData];
+}
 
 -(void) viewWillAppear:(BOOL)animated
 {
@@ -130,7 +140,7 @@
     
     cell.textLabel.text = company.companyName;
     cell.imageView.image = [UIImage imageNamed:company.companyImageName];
-    cell.detailTextLabel.text = @"my stock price";
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"$ %@", company.stockPrice];
     
     // cell.imageView.image will be nil because it can not find the mathch in Images.xcassets
     // then we search through the document directory
