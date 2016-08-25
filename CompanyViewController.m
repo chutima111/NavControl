@@ -28,6 +28,7 @@
     
     if (self) {
         // Custom initialization
+        
     }
     return self;
 }
@@ -78,6 +79,8 @@
     [self.dao getStockPrice];
     
 }
+
+
 
 -(void)refreshData
 {
@@ -133,18 +136,22 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        
     }
     
     // Configure the cell...
     companyInfoClass *company = [self.companies objectAtIndex:[indexPath row]];
     
     cell.textLabel.text = company.companyName;
-    cell.imageView.image = [UIImage imageNamed:company.companyImageName];
+    
+    // set images all the same size
+    UIImage *unscaledImage = [UIImage imageNamed:company.companyImageName];
+    cell.imageView.image = [self reSizeImage:unscaledImage toSize:CGSizeMake(50,50)];
+    
     cell.detailTextLabel.text = [NSString stringWithFormat:@"$ %@", company.stockPrice];
     
     // cell.imageView.image will be nil because it can not find the mathch in Images.xcassets
     // then we search through the document directory
-    
     if (cell.imageView.image == nil) {
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *documentsDirectory = [paths objectAtIndex:0];
@@ -242,6 +249,16 @@
         [self.navigationController pushViewController:self.productViewController animated:YES];
     }
     
+}
+
+
+- (UIImage *)reSizeImage:(UIImage *)image toSize:(CGSize)reSize
+{
+    UIGraphicsBeginImageContext(CGSizeMake(reSize.width, reSize.height));
+    [image drawInRect:CGRectMake(0, 0, reSize.width, reSize.height)];
+    UIImage *reSizeImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return reSizeImage;
 }
 
 
