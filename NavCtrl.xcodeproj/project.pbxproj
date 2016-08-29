@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		207810DE1D7227C7002E8560 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 207810DD1D7227C7002E8560 /* CoreData.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		207810E11D7229CA002E8560 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 207810DF1D7229CA002E8560 /* Model.xcdatamodeld */; };
+		207810F01D7231D1002E8560 /* Product+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 207810E91D7231D0002E8560 /* Product+CoreDataProperties.m */; };
+		207810F11D7231D1002E8560 /* Product.m in Sources */ = {isa = PBXBuildFile; fileRef = 207810EB1D7231D0002E8560 /* Product.m */; };
+		207810F21D7231D1002E8560 /* Company+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 207810ED1D7231D0002E8560 /* Company+CoreDataProperties.m */; };
+		207810F31D7231D1002E8560 /* Company.m in Sources */ = {isa = PBXBuildFile; fileRef = 207810EF1D7231D1002E8560 /* Company.m */; };
 		20C792431D5C20F0000A0015 /* detailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20C792411D5C20F0000A0015 /* detailsViewController.m */; };
 		20C792441D5C20F0000A0015 /* detailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20C792421D5C20F0000A0015 /* detailsViewController.xib */; };
 		20C792461D5CDEE5000A0015 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20C792451D5CDEE5000A0015 /* WebKit.framework */; };
@@ -51,6 +57,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		207810DD1D7227C7002E8560 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		207810E01D7229CA002E8560 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		207810E81D7231D0002E8560 /* Product+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Product+CoreDataProperties.h"; sourceTree = "<group>"; };
+		207810E91D7231D0002E8560 /* Product+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Product+CoreDataProperties.m"; sourceTree = "<group>"; };
+		207810EA1D7231D0002E8560 /* Product.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Product.h; sourceTree = "<group>"; };
+		207810EB1D7231D0002E8560 /* Product.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Product.m; sourceTree = "<group>"; };
+		207810EC1D7231D0002E8560 /* Company+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Company+CoreDataProperties.h"; sourceTree = "<group>"; };
+		207810ED1D7231D0002E8560 /* Company+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Company+CoreDataProperties.m"; sourceTree = "<group>"; };
+		207810EE1D7231D0002E8560 /* Company.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Company.h; sourceTree = "<group>"; };
+		207810EF1D7231D1002E8560 /* Company.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Company.m; sourceTree = "<group>"; };
 		20C792401D5C20F0000A0015 /* detailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = detailsViewController.h; sourceTree = "<group>"; };
 		20C792411D5C20F0000A0015 /* detailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = detailsViewController.m; sourceTree = "<group>"; };
 		20C792421D5C20F0000A0015 /* detailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = detailsViewController.xib; sourceTree = "<group>"; };
@@ -103,6 +119,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				207810DE1D7227C7002E8560 /* CoreData.framework in Frameworks */,
 				20C792461D5CDEE5000A0015 /* WebKit.framework in Frameworks */,
 				48A656B718163BF200746D36 /* CoreGraphics.framework in Frameworks */,
 				48A656B918163BF200746D36 /* UIKit.framework in Frameworks */,
@@ -203,6 +220,14 @@
 		48A656A818163BF200746D36 = {
 			isa = PBXGroup;
 			children = (
+				207810E81D7231D0002E8560 /* Product+CoreDataProperties.h */,
+				207810E91D7231D0002E8560 /* Product+CoreDataProperties.m */,
+				207810EA1D7231D0002E8560 /* Product.h */,
+				207810EB1D7231D0002E8560 /* Product.m */,
+				207810EC1D7231D0002E8560 /* Company+CoreDataProperties.h */,
+				207810ED1D7231D0002E8560 /* Company+CoreDataProperties.m */,
+				207810EE1D7231D0002E8560 /* Company.h */,
+				207810EF1D7231D1002E8560 /* Company.m */,
 				20C792491D5FD1A0000A0015 /* companyInfoClass.h */,
 				20C7924A1D5FD1A0000A0015 /* companyInfoClass.m */,
 				20C7924C1D5FD235000A0015 /* productClass.h */,
@@ -229,6 +254,7 @@
 		48A656B318163BF200746D36 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				207810DD1D7227C7002E8560 /* CoreData.framework */,
 				20C792451D5CDEE5000A0015 /* WebKit.framework */,
 				48A656B418163BF200746D36 /* Foundation.framework */,
 				48A656B618163BF200746D36 /* CoreGraphics.framework */,
@@ -259,6 +285,7 @@
 		48A656BB18163BF200746D36 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				207810DF1D7229CA002E8560 /* Model.xcdatamodeld */,
 				48A656ED1816468000746D36 /* Sunflower.gif */,
 				48A656BC18163BF200746D36 /* NavCtrl-Info.plist */,
 				48A656BD18163BF200746D36 /* InfoPlist.strings */,
@@ -396,11 +423,16 @@
 				20C7924E1D5FD235000A0015 /* productClass.m in Sources */,
 				20C792511D6222CA000A0015 /* DAO.m in Sources */,
 				20C792581D6365ED000A0015 /* AddNewCompanyViewController.m in Sources */,
+				207810F31D7231D1002E8560 /* Company.m in Sources */,
+				207810F11D7231D1002E8560 /* Product.m in Sources */,
 				48A656C118163BF200746D36 /* main.m in Sources */,
 				20C792431D5C20F0000A0015 /* detailsViewController.m in Sources */,
+				207810F21D7231D1002E8560 /* Company+CoreDataProperties.m in Sources */,
 				20C7926F1D6B80BE000A0015 /* EditProductViewController.m in Sources */,
+				207810F01D7231D1002E8560 /* Product+CoreDataProperties.m in Sources */,
 				48A656EB18163F8700746D36 /* ProductViewController.m in Sources */,
 				20C792631D661343000A0015 /* AddNewProductViewController.m in Sources */,
+				207810E11D7229CA002E8560 /* Model.xcdatamodeld in Sources */,
 				20C792691D6B4E9B000A0015 /* EditCompanyViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -621,6 +653,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		207810DF1D7229CA002E8560 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				207810E01D7229CA002E8560 /* Model.xcdatamodel */,
+			);
+			currentVersion = 207810E01D7229CA002E8560 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 48A656A918163BF200746D36 /* Project object */;
 }

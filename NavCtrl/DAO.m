@@ -10,29 +10,130 @@
 #import "companyInfoClass.h"
 #import "productClass.h"
 
+#import "Company.h"
+#import "Product.h"
+
 @implementation DAO
+
+-(id) init
+{
+    self = [super init];
+    if (self) {
+        //custom initializer
+        [self initCoreData];
+    }
+    return self;
+}
+
+-(void) initCoreData
+{
+    // 1. Create  ObjectModel
+    _managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];
+    
+    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:_managedObjectModel];
+    
+    // 2. Create context
+    NSString *path = [self archivePath];
+    NSURL *storeURL = [NSURL fileURLWithPath:path];
+    NSError *error = nil;
+    
+    
+    if ([_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
+        
+        [NSException raise:@"Open failed" format:@"Reason: %@", [error localizedDescription]];
+    }
+    
+    _managedObjectContext = [[NSManagedObjectContext alloc] init];
+    
+    // Add an undo manager
+    _managedObjectContext.undoManager = [[NSUndoManager alloc] init];
+    
+    // 3. Now the context points to the SQLite store
+    [_managedObjectContext setPersistentStoreCoordinator:_persistentStoreCoordinator];
+    
+}
+
+// Physical storage location in device
+-(NSString *)archivePath
+{
+    NSArray *documentsDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [documentsDirectories objectAtIndex:0];
+    return [documentsDirectory stringByAppendingPathComponent:@"store.data"];
+}
 
 -(void)createCompaniesAndProducts
 {
-    companyInfoClass *apple = [[companyInfoClass alloc]init];
+    // Test : create default value for company in core data
+    
+    // Apple company
+    Company *apple = [NSEntityDescription insertNewObjectForEntityForName:@"Company" inManagedObjectContext:_managedObjectContext];
+    
+    [apple setCompanyName:@"Apple Inc"];
+    [apple setCompanyImageName:@"appleLogoImage"];
+    [apple setCompanyTicker:@"AAPL"];
+    
+    Product *iPhone = [NSEntityDescription insertNewObjectForEntityForName:@"Product" inManagedObjectContext:_managedObjectContext];
+    [iPhone setProductName:@"iPhone"];
+    [iPhone setProductImage:@"iPhoneImage"];
+    [iPhone setProductURL:@"http://www.apple.com/iphone/"];
+    
+    Product *iPad = [NSEntityDescription insertNewObjectForEntityForName:@"Product" inManagedObjectContext:_managedObjectContext];
+    [iPad setProductName:@"iPad"];
+    [iPad setProductImage:@"iPadImage"];
+    [iPad setProductURL:@"http://www.apple.com/ipad/"];
+    
+    Product *iPod = [NSEntityDescription insertNewObjectForEntityForName:@"Product" inManagedObjectContext:_managedObjectContext];
+    [iPod setProductName:@"iPod"];
+    [iPod setProductImage:@"iPodImage"];
+    [iPod setProductURL:@"http://www.apple.com/ipod/"];
+    
+    [apple addProductsObject:iPhone];
+    [apple addProductsObject:iPad];
+    [apple addProductsObject:iPod];
+    
+    
+    // Google company
+    Company *google = [NSEntityDescription insertNewObjectForEntityForName:@"Company" inManagedObjectContext:_managedObjectContext];
+    
+    [google setCompanyName:@"Google"];
+    [google setCompanyImageName:@"googleLogoImage"];
+    [google setCompanyTicker:@"GOOG"];
+    
+    // Tesla company
+    Company *tesla = [NSEntityDescription insertNewObjectForEntityForName:@"Company" inManagedObjectContext:_managedObjectContext];
+    
+    [tesla setCompanyName:@"Tesla"];
+    [tesla setCompanyImageName:@"teslaLogoImage"];
+    [tesla setCompanyTicker:@"TSLA"];
+    
+    // Ford company
+    Company *ford = [NSEntityDescription insertNewObjectForEntityForName:@"Company" inManagedObjectContext:_managedObjectContext];
+    [ford setCompanyName:@"Ford"];
+    [ford setCompanyImageName:@"fordLogoImage"];
+    [ford setCompanyTicker:@"F"];
+    
+    
+    
+    // Create all default value for companies
+/*    companyInfoClass *apple = [[companyInfoClass alloc]init];
     apple.companyName = @"Apple mobile devices";
-    apple.companyImageName = @"apple company logo";
+    apple.companyImageName = @"appleLogoImage";
     apple.companyTicker = @"AAPL";
     apple.productsArray = [NSMutableArray array];
     
     productClass *iPhone = [[productClass alloc] init];
     iPhone.productName = @"iPhone";
-    iPhone.productImage = @"iPhone pic";
+    iPhone.productImage = @"iPhoneImage";
     iPhone.productUrl = @"http://www.apple.com/iphone/";
     
     productClass *iPad = [[productClass alloc] init];
     iPad.productName = @"iPad";
-    iPad.productImage = @"iPad pic";
+    iPad.productImage = @"iPadImage";
     iPad.productUrl = @"http://www.apple.com/ipad/";
     
     productClass *iPod = [[productClass alloc] init];
     iPod.productName = @"iPod";
-    iPod.productImage = @"iPod pic";
+    iPod.productImage = @"iPodImage";
     iPod.productUrl = @"http://www.apple.com/ipod/";
     
     // Add product information in the apple company
@@ -115,7 +216,7 @@
     [ford.productsArray addObject:fordFiesta];
     [ford.productsArray addObject:fordFocus];
     [ford.productsArray addObject:fordMustang];
-    
+ */
     
     
     self.companyList = [NSMutableArray array];

@@ -63,6 +63,7 @@
     // ADD ALL THE COMPANIES
     
     self.dao = [DAO sharedInstance];
+    
     [self.dao createCompaniesAndProducts];
     self.companies = self.dao.companyList;
     

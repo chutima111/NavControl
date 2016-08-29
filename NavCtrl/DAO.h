@@ -7,11 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
 @class companyInfoClass;
 @class productClass;
 
 @interface DAO : NSObject
+
+@property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
+@property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 @property (nonatomic,strong) NSMutableArray *companyList;
 
@@ -40,6 +45,8 @@
 
 
 +(DAO *)sharedInstance;
+
+-(NSString *)archivePath;
 
 
 @end

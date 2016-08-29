@@ -80,4 +80,11 @@
 }
 */
 
+-(void) dealloc
+{
+    [super dealloc];
+    
+    [self.webView release];
+}
+
 @end
