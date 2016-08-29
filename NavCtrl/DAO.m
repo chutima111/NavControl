@@ -15,17 +15,17 @@
 
 @implementation DAO
 
--(id) init
+-(instancetype)init
 {
     self = [super init];
     if (self) {
         //custom initializer
-        [self initCoreData];
+        [self createCoreData];
     }
     return self;
 }
 
--(void) initCoreData
+-(void) createCoreData
 {
     // 1. Create  ObjectModel
     _managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];
@@ -35,11 +35,11 @@
     // 2. Create context
     NSString *path = [self archivePath];
     NSURL *storeURL = [NSURL fileURLWithPath:path];
-    NSError *error = nil;
+    NSError *error;
     
-    
-    if ([_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
-        
+    NSLog(@"%@", path);
+    [_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error];
+    if (error) {
         [NSException raise:@"Open failed" format:@"Reason: %@", [error localizedDescription]];
     }
     
@@ -58,7 +58,7 @@
 {
     NSArray *documentsDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [documentsDirectories objectAtIndex:0];
-    return [documentsDirectory stringByAppendingPathComponent:@"store.data"];
+    return [documentsDirectory stringByAppendingPathComponent:@"NavCtrl.data"];
 }
 
 -(void)createCompaniesAndProducts
@@ -289,7 +289,7 @@
     
     int i = 0;
     for (i = 0; i < [_companyList count]; i++) {
-        companyInfoClass *temp = _companyList[i];
+        Company *temp = _companyList[i];
         NSString *tempTicker = temp.companyTicker;
         
         tickersString = [tickersString stringByAppendingString:tempTicker];
@@ -320,8 +320,8 @@
         
         for (int i = 0; i < [tickerAndPriceArray count]-1; i = i+2) {
             NSString *ticker = tickerAndPriceArray[i];
-            companyInfoClass *company = [self findCompanyByTicker:ticker];
-            company.stockPrice = tickerAndPriceArray[i+1];
+            Company *company = [self findCompanyByTicker:ticker];
+            company.stockPrice = [NSNumber numberWithInteger:[tickerAndPriceArray[i+1]integerValue]];
         }
         
         // get the main thred
@@ -339,9 +339,9 @@
     
 }
 
--(companyInfoClass *)findCompanyByTicker:(NSString *)ticker
+-(Company *)findCompanyByTicker:(NSString *)ticker
 {
-    for (companyInfoClass *company in self.companyList) {
+    for (Company *company in self.companyList) {
         if ([company.companyTicker isEqualToString:ticker])
             return company;
     }
