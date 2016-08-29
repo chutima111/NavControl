@@ -10,6 +10,8 @@
 #import "companyInfoClass.h"
 #import "DAO.h"
 
+#import "Company.h"
+
 
 @interface AddNewCompanyViewController () <UITextFieldDelegate>
 

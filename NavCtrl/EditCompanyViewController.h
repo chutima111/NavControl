@@ -9,12 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "companyInfoClass.h"
 
+#import "Company.h"
+
 @interface EditCompanyViewController : UIViewController <UITextFieldDelegate>
 
 @property (retain, nonatomic) IBOutlet UITextField *txfCompanyName;
 @property (retain, nonatomic) IBOutlet UITextField *txfCompanyImageURL;
 
 @property (retain, nonatomic) IBOutlet UITextField *txfCompanyTicker;
-@property (nonatomic, strong) companyInfoClass *company;
+@property (nonatomic, strong) Company *company;
 
 @end

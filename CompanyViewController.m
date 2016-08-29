@@ -14,6 +14,9 @@
 #import "AddNewCompanyViewController.h"
 #import "EditCompanyViewController.h"
 
+#import "Company.h"
+
+
 @interface CompanyViewController ()
 
 @property (nonatomic, strong) DAO * dao;
@@ -141,7 +144,7 @@
     }
     
     // Configure the cell...
-    companyInfoClass *company = [self.companies objectAtIndex:[indexPath row]];
+    Company *company = [self.companies objectAtIndex:[indexPath row]];
     
     cell.textLabel.text = company.companyName;
     
@@ -200,7 +203,7 @@
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
-    companyInfoClass *company = [self.companies objectAtIndex:fromIndexPath.row];
+    Company *company = [self.companies objectAtIndex:fromIndexPath.row];
     [self.companies removeObject:company];
     [self.companies insertObject:company atIndex:toIndexPath.row];
 }
@@ -227,7 +230,7 @@
     // I want to be able to select the cell and do something with it
     if (tableView.editing == YES) {
         
-        companyInfoClass *company = self.companies[indexPath.row];
+        Company *company = self.companies[indexPath.row];
         
         // Create the next view controller
         EditCompanyViewController *editCompanyViewController = [[EditCompanyViewController alloc]initWithNibName:@"EditCompanyViewController" bundle:nil];
@@ -242,7 +245,7 @@
     } else {
         
         // if the table view is not on editing mode do something when the select the cell
-        companyInfoClass *company = self.companies[indexPath.row];
+        Company *company = self.companies[indexPath.row];
         self.productViewController.title = company.companyName;
         self.productViewController.company = company;
         

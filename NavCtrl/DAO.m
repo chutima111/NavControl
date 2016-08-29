@@ -99,6 +99,20 @@
     [google setCompanyImageName:@"googleLogoImage"];
     [google setCompanyTicker:@"GOOG"];
     
+    Product *gmail = [NSEntityDescription insertNewObjectForEntityForName:@"Product" inManagedObjectContext:_managedObjectContext];
+    [gmail setProductName:@"Gmail"];
+    [gmail setProductImage:@"gmailLogoImage"];
+    [gmail setProductURL:@"https://www.google.com/gmail/about/"];
+    
+    Product *googleMaps = [NSEntityDescription insertNewObjectForEntityForName:@"Product" inManagedObjectContext:_managedObjectContext];
+    [googleMaps setProductName:@"Google Maps"];
+    [googleMaps setProductImage:@"googleMapsLogoImage"];
+    [googleMaps setProductURL:@"https://maps.google.com/"];
+    
+    // Then add products to Google company
+    [google addProductsObject:gmail];
+    [google addProductsObject:googleMaps];
+    
     // Tesla company
     Company *tesla = [NSEntityDescription insertNewObjectForEntityForName:@"Company" inManagedObjectContext:_managedObjectContext];
     
@@ -106,11 +120,51 @@
     [tesla setCompanyImageName:@"teslaLogoImage"];
     [tesla setCompanyTicker:@"TSLA"];
     
+    Product *teslaModelS = [NSEntityDescription insertNewObjectForEntityForName:@"Product" inManagedObjectContext:_managedObjectContext];
+    [teslaModelS setProductName:@"Tesla Model S"];
+    [teslaModelS setProductImage:@"teslaModelSImage"];
+    [teslaModelS setProductURL:@"https://www.tesla.com/models"];
+    
+    Product *teslaModelX = [NSEntityDescription insertNewObjectForEntityForName:@"Product" inManagedObjectContext:_managedObjectContext];
+    [teslaModelX setProductName:@"Tesla Model X"];
+    [teslaModelX setProductImage:@"teslaModelXImage"];
+    [teslaModelX setProductURL:@"https://www.tesla.com/modelx"];
+    
+    Product *teslaModel3 = [NSEntityDescription insertNewObjectForEntityForName:@"Product" inManagedObjectContext:_managedObjectContext];
+    [teslaModel3 setProductName:@"Tesla Model 3"];
+    [teslaModel3 setProductImage:@"teslaModel3Image"];
+    [teslaModel3 setProductURL:@"https://www.tesla.com/model3"];
+    
+    // Add products to Tesla company
+    [tesla addProductsObject:teslaModelS];
+    [tesla addProductsObject:teslaModelX];
+    [tesla addProductsObject:teslaModel3];
+    
     // Ford company
     Company *ford = [NSEntityDescription insertNewObjectForEntityForName:@"Company" inManagedObjectContext:_managedObjectContext];
     [ford setCompanyName:@"Ford"];
     [ford setCompanyImageName:@"fordLogoImage"];
     [ford setCompanyTicker:@"F"];
+    
+    Product *fordFiesta = [NSEntityDescription insertNewObjectForEntityForName:@"Product" inManagedObjectContext:_managedObjectContext];
+    [fordFiesta setProductName:@"Ford Fiesta"];
+    [fordFiesta setProductImage:@"fordFiestaImage"];
+    [fordFiesta setProductURL:@"http://www.ford.com/cars/fiesta/"];
+    
+    Product *fordFocus = [NSEntityDescription insertNewObjectForEntityForName:@"Product" inManagedObjectContext:_managedObjectContext];
+    [fordFocus setProductName:@"Ford Focus"];
+    [fordFocus setProductImage:@"fordFocusImage"];
+    [fordFocus setProductURL:@"http://www.ford.com/cars/focus/"];
+    
+    Product *fordMustang = [NSEntityDescription insertNewObjectForEntityForName:@"Product" inManagedObjectContext:_managedObjectContext];
+    [fordMustang setProductName:@"Ford Mustang"];
+    [fordMustang setProductImage:@"fordMustangImage"];
+    [fordMustang setProductURL:@"http://www.ford.com/cars/mustang/"];
+    
+    // Add products to Ford company
+    [ford addProductsObject:fordFiesta];
+    [ford addProductsObject:fordFocus];
+    [ford addProductsObject:fordMustang];
     
     
     
