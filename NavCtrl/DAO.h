@@ -23,8 +23,8 @@
 -(void)createCompaniesAndProducts;
 -(void)addNewCompanyToList:(NSString *)companyName
               companyImage:(NSString *)companyImage
-             companyTicker:(NSString *)companyTicker
-             productsArray:(NSMutableArray *)productsArray;
+             companyTicker:(NSString *)companyTicker;
+
 
 -(void)addNewProductToList:(NSString *)productName
            productImageURL:(NSString *)productImageURL
@@ -47,6 +47,8 @@
 +(DAO *)sharedInstance;
 
 -(NSString *)archivePath;
+
+-(void)reloadDataFromContext;
 
 
 @end

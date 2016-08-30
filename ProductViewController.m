@@ -99,7 +99,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [self.company.products count];
+    return [self.company.productsArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -110,7 +110,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     // Configure the cell...
-    Product *product = [self.company.products objectAtIndex:indexPath.row];
+    productClass *product = [self.company.productsArray objectAtIndex:indexPath.row];
     
     cell.textLabel.text = product.productName;
     cell.imageView.image = [UIImage imageNamed:product.productImage];
@@ -145,7 +145,7 @@
     
 
     // Pass the selected object to the new view controller.
-    Product *product = self.company.products[indexPath.row];
+    productClass *product = self.company.productsArray[indexPath.row];
     
     // Create the product reference to the new view controller
     detailViewController.product = product;
@@ -173,7 +173,7 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        [self.company.products removeObjectAtIndex:indexPath.row];
+        [self.company.productsArray removeObjectAtIndex:indexPath.row];
         
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }   
@@ -188,9 +188,9 @@
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
-    Product *product = self.company.products[fromIndexPath.row];
-    [self.company.products removeObject:product];
-     [self.company.products insertObject:product atIndex:toIndexPath.row];
+    productClass *product = self.company.productsArray[fromIndexPath.row];
+    [self.company.productsArray removeObject:product];
+     [self.company.productsArray insertObject:product atIndex:toIndexPath.row];
 }
 
 

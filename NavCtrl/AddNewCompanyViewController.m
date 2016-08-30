@@ -10,7 +10,6 @@
 #import "companyInfoClass.h"
 #import "DAO.h"
 
-#import "Company.h"
 
 
 @interface AddNewCompanyViewController () <UITextFieldDelegate>
@@ -101,8 +100,8 @@
 {
     [[DAO sharedInstance] addNewCompanyToList:self.txfCompanyName.text
                                  companyImage:self.txfCompanyImageUrl.text
-                                companyTicker:self.txfCompanyTicker.text
-                                productsArray:[NSMutableArray array]];
+                                companyTicker:self.txfCompanyTicker.text];
+     
     
     
     // Save the image from URL to temp directory

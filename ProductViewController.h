@@ -10,12 +10,9 @@
 #import "detailsViewController.h"
 #import "companyInfoClass.h"
 
-#import "Company.h"
-#import "Product.h"
-
 
 @interface ProductViewController : UITableViewController
 
-@property (nonatomic, strong) Company *company;
+@property (nonatomic, strong) companyInfoClass *company;
 
 @end

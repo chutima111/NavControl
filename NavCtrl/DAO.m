@@ -15,6 +15,20 @@
 
 @implementation DAO
 
+
++(DAO *)sharedInstance
+{
+    static DAO *sharedInstance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[DAO alloc]init];
+    });
+    
+    return sharedInstance;
+    
+}
+
+
 -(instancetype)init
 {
     self = [super init];
@@ -24,6 +38,8 @@
     }
     return self;
 }
+
+#pragma mark core data
 
 -(void) createCoreData
 {
@@ -39,6 +55,7 @@
     
     NSLog(@"%@", path);
     [_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error];
+    
     if (error) {
         [NSException raise:@"Open failed" format:@"Reason: %@", [error localizedDescription]];
     }
@@ -51,6 +68,8 @@
     // 3. Now the context points to the SQLite store
     [_managedObjectContext setPersistentStoreCoordinator:_persistentStoreCoordinator];
     
+    //try to load from core data
+    [self reloadDataFromContext];
 }
 
 // Physical storage location in device
@@ -61,6 +80,39 @@
     return [documentsDirectory stringByAppendingPathComponent:@"NavCtrl.data"];
 }
 
+-(void)reloadDataFromContext
+{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Company" inManagedObjectContext:_managedObjectContext];
+    
+    [fetchRequest setEntity:entity];
+    //
+    //    // Specify criteria for filtering which objects to fetch
+    //    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"<#format string#>", <#arguments#>];
+    //    [fetchRequest setPredicate:predicate];
+    //    // Specify how the fetched objects should be sorted
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"companyName"
+                                                                   ascending:YES];
+    [fetchRequest setSortDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
+    
+    NSError *error = nil;
+    NSArray *fetchedObjects = [_managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    if (fetchedObjects == nil)
+    {
+        [NSException raise:@"Fetch Failed" format:@"Reason: %@", [error localizedDescription]];
+    }
+    
+    if ([fetchedObjects count] == 0) {
+        [self createCompaniesAndProducts];
+    } else {
+        [self setCompanyList:[[NSMutableArray alloc]initWithArray:fetchedObjects]];
+    }
+    
+}
+
+
+#pragma mark create default values
+
 -(void)createCompaniesAndProducts
 {
     // Test : create default value for company in core data
@@ -69,7 +121,7 @@
     Company *apple = [NSEntityDescription insertNewObjectForEntityForName:@"Company" inManagedObjectContext:_managedObjectContext];
     
     [apple setCompanyName:@"Apple Inc"];
-    [apple setCompanyImageName:@"appleLogoImage"];
+    [apple setCompanyImageName:@"Apple Inc"];
     [apple setCompanyTicker:@"AAPL"];
     
     Product *iPhone = [NSEntityDescription insertNewObjectForEntityForName:@"Product" inManagedObjectContext:_managedObjectContext];
@@ -287,15 +339,30 @@
 -(void)addNewCompanyToList:(NSString *)companyName
               companyImage:(NSString *)companyImage
              companyTicker:(NSString *)companyTicker
-             productsArray:(NSMutableArray *)productsArray
+
 {
-    companyInfoClass *companyInfo = [[companyInfoClass alloc] init];
-    companyInfo.companyName = companyName;
-    companyInfo.companyImageName = companyImage;
-    companyInfo.companyTicker = companyTicker;
-    companyInfo.productsArray = productsArray;
+    Company *companyInfo = [NSEntityDescription insertNewObjectForEntityForName:@"Company" inManagedObjectContext:_managedObjectContext];
+    [companyInfo setCompanyName:companyName];
+    [companyInfo setCompanyImageName:companyImage];
+    [companyInfo setCompanyTicker:companyTicker];
+    
+    // Save to Disk
+    [self saveChanges];
+    
     [self.companyList addObject:companyInfo];
 }
+
+-(void)saveChanges
+{
+    NSError *error = nil;
+    BOOL successful = [_managedObjectContext save:&error];
+    if (!successful)
+    {
+        NSLog(@"Error saving: %@", [error localizedDescription]);
+    }
+    NSLog(@"Data saved");
+}
+
 
 -(void)addNewProductToList:(NSString *)productName
            productImageURL:(NSString *)productImageURL
@@ -403,17 +470,7 @@
     return nil;
 }
 
-+(DAO *)sharedInstance
-{
-    static DAO *sharedInstance = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        sharedInstance = [[DAO alloc]init];
-    });
-    
-    return sharedInstance;
-    
-}
+
 
 
 

@@ -13,6 +13,7 @@
 		207810F11D7231D1002E8560 /* Product.m in Sources */ = {isa = PBXBuildFile; fileRef = 207810EB1D7231D0002E8560 /* Product.m */; };
 		207810F21D7231D1002E8560 /* Company+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 207810ED1D7231D0002E8560 /* Company+CoreDataProperties.m */; };
 		207810F31D7231D1002E8560 /* Company.m in Sources */ = {isa = PBXBuildFile; fileRef = 207810EF1D7231D1002E8560 /* Company.m */; };
+		207810F51D74C92F002E8560 /* Apple Inc.png in Resources */ = {isa = PBXBuildFile; fileRef = 207810F41D74C92F002E8560 /* Apple Inc.png */; };
 		20C792431D5C20F0000A0015 /* detailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20C792411D5C20F0000A0015 /* detailsViewController.m */; };
 		20C792441D5C20F0000A0015 /* detailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20C792421D5C20F0000A0015 /* detailsViewController.xib */; };
 		20C792461D5CDEE5000A0015 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20C792451D5CDEE5000A0015 /* WebKit.framework */; };
@@ -67,6 +68,7 @@
 		207810ED1D7231D0002E8560 /* Company+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Company+CoreDataProperties.m"; sourceTree = "<group>"; };
 		207810EE1D7231D0002E8560 /* Company.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Company.h; sourceTree = "<group>"; };
 		207810EF1D7231D1002E8560 /* Company.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Company.m; sourceTree = "<group>"; };
+		207810F41D74C92F002E8560 /* Apple Inc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Apple Inc.png"; path = "Images.xcassets/Apple Inc.imageset/Apple Inc.png"; sourceTree = "<group>"; };
 		20C792401D5C20F0000A0015 /* detailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = detailsViewController.h; sourceTree = "<group>"; };
 		20C792411D5C20F0000A0015 /* detailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = detailsViewController.m; sourceTree = "<group>"; };
 		20C792421D5C20F0000A0015 /* detailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = detailsViewController.xib; sourceTree = "<group>"; };
@@ -276,6 +278,7 @@
 				20C7923F1D5C20A4000A0015 /* detailsViewController */,
 				20C7926B1D6B800F000A0015 /* EditProductViewController */,
 				48A656C618163BF200746D36 /* Images.xcassets */,
+				207810F41D74C92F002E8560 /* Apple Inc.png */,
 				48A656E518163C1B00746D36 /* CompanyViewController.xib */,
 				48A656BB18163BF200746D36 /* Supporting Files */,
 			);
@@ -390,6 +393,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				20C792481D5CF25C000A0015 /* Launch Screen.storyboard in Resources */,
+				207810F51D74C92F002E8560 /* Apple Inc.png in Resources */,
 				20C7926A1D6B4E9B000A0015 /* EditCompanyViewController.xib in Resources */,
 				48A656EE1816468000746D36 /* Sunflower.gif in Resources */,
 				48A656E718163C1B00746D36 /* CompanyViewController.xib in Resources */,

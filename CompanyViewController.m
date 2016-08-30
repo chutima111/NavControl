@@ -14,7 +14,7 @@
 #import "AddNewCompanyViewController.h"
 #import "EditCompanyViewController.h"
 
-#import "Company.h"
+
 
 
 @interface CompanyViewController ()
@@ -67,7 +67,6 @@
     
     self.dao = [DAO sharedInstance];
     
-    [self.dao createCompaniesAndProducts];
     self.companies = self.dao.companyList;
     
     // Allow the select the cell during the editing mode
@@ -94,6 +93,8 @@
 -(void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    [self.dao getStockPrice];
     
     [self.tableView reloadData];
 }
@@ -144,7 +145,7 @@
     }
     
     // Configure the cell...
-    Company *company = [self.companies objectAtIndex:[indexPath row]];
+    companyInfoClass *company = [self.companies objectAtIndex:[indexPath row]];
     
     cell.textLabel.text = company.companyName;
     
@@ -156,7 +157,7 @@
     
     // cell.imageView.image will be nil because it can not find the mathch in Images.xcassets
     // then we search through the document directory
-    if (cell.imageView.image == nil) {
+    if (unscaledImage == nil) {
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *documentsDirectory = [paths objectAtIndex:0];
         NSString *path = [documentsDirectory stringByAppendingPathComponent:company.companyName];
@@ -203,7 +204,7 @@
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
-    Company *company = [self.companies objectAtIndex:fromIndexPath.row];
+    companyInfoClass *company = [self.companies objectAtIndex:fromIndexPath.row];
     [self.companies removeObject:company];
     [self.companies insertObject:company atIndex:toIndexPath.row];
 }
@@ -230,7 +231,7 @@
     // I want to be able to select the cell and do something with it
     if (tableView.editing == YES) {
         
-        Company *company = self.companies[indexPath.row];
+        companyInfoClass *company = self.companies[indexPath.row];
         
         // Create the next view controller
         EditCompanyViewController *editCompanyViewController = [[EditCompanyViewController alloc]initWithNibName:@"EditCompanyViewController" bundle:nil];
@@ -245,7 +246,7 @@
     } else {
         
         // if the table view is not on editing mode do something when the select the cell
-        Company *company = self.companies[indexPath.row];
+        companyInfoClass *company = self.companies[indexPath.row];
         self.productViewController.title = company.companyName;
         self.productViewController.company = company;
         
