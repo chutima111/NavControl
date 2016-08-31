@@ -2,7 +2,7 @@
 //  Company+CoreDataProperties.m
 //  NavCtrl
 //
-//  Created by chutima mungmee on 8/28/16.
+//  Created by chutima mungmee on 8/30/16.
 //  Copyright © 2016 Aditya Narayan. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu

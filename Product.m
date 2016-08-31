@@ -7,6 +7,7 @@
 //
 
 #import "Product.h"
+#import "Company.h"
 
 @implementation Product
 

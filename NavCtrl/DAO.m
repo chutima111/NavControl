@@ -105,11 +105,31 @@
     if ([fetchedObjects count] == 0) {
         [self createCompaniesAndProducts];
     } else {
-        [self setCompanyList:[[NSMutableArray alloc]initWithArray:fetchedObjects]];
+        NSMutableArray *companiesArray = [[NSMutableArray alloc] init];
+        for(Company *company in fetchedObjects){
+            [companiesArray addObject:[self convertManagedCompanyToCIC:company]];
+        }
+        
+        [self setCompanyList:companiesArray];
     }
     
 }
 
+-(companyInfoClass*)convertManagedCompanyToCIC:(Company *) company{
+    companyInfoClass *theCompany = [[companyInfoClass alloc]init];
+    theCompany.companyName = company.companyName;
+    theCompany.companyImageName = company.companyImageName;
+    theCompany.companyTicker = company.companyTicker;
+    theCompany.productsArray = [[NSMutableArray alloc]init];
+    for (Product *product in company.products) {
+        productClass *product1 = [[productClass alloc] init];
+        product1.productName = product.productName;
+        product1.productImage = product.productImage;
+        product1.productUrl = product.productURL;
+        [theCompany.productsArray addObject:product1];
+    }
+    return theCompany;
+}
 
 #pragma mark create default values
 
@@ -139,9 +159,13 @@
     [iPod setProductImage:@"iPodImage"];
     [iPod setProductURL:@"http://www.apple.com/ipod/"];
     
-    [apple addProductsObject:iPhone];
-    [apple addProductsObject:iPad];
-    [apple addProductsObject:iPod];
+    // Try to add products to the company [Both ways work]
+//    [iPhone setValue:apple forKey:@"company"];
+//    [iPad setValue:apple forKey:@"company"];
+//    [iPod setValue:apple forKey:@"company"];
+//    
+    [apple setProducts:[NSSet setWithObjects:iPhone, iPad, iPod, nil]];
+    
     
     
     // Google company
@@ -162,8 +186,7 @@
     [googleMaps setProductURL:@"https://maps.google.com/"];
     
     // Then add products to Google company
-    [google addProductsObject:gmail];
-    [google addProductsObject:googleMaps];
+    [google setProducts:[NSSet setWithObjects:gmail, googleMaps, nil]];
     
     // Tesla company
     Company *tesla = [NSEntityDescription insertNewObjectForEntityForName:@"Company" inManagedObjectContext:_managedObjectContext];
@@ -188,9 +211,7 @@
     [teslaModel3 setProductURL:@"https://www.tesla.com/model3"];
     
     // Add products to Tesla company
-    [tesla addProductsObject:teslaModelS];
-    [tesla addProductsObject:teslaModelX];
-    [tesla addProductsObject:teslaModel3];
+    [tesla setProducts:[NSSet setWithObjects:teslaModelS, teslaModelX, teslaModel3, nil]];
     
     // Ford company
     Company *ford = [NSEntityDescription insertNewObjectForEntityForName:@"Company" inManagedObjectContext:_managedObjectContext];
@@ -213,10 +234,8 @@
     [fordMustang setProductImage:@"fordMustangImage"];
     [fordMustang setProductURL:@"http://www.ford.com/cars/mustang/"];
     
-    // Add products to Ford company
-    [ford addProductsObject:fordFiesta];
-    [ford addProductsObject:fordFocus];
-    [ford addProductsObject:fordMustang];
+    // Add products to Ford company;
+    [ford setProducts:[NSSet setWithObjects:fordFiesta, fordFocus, fordMustang, nil]];
     
     
     
@@ -328,13 +347,25 @@
     self.companyList = [NSMutableArray array];
     
     // ADD ALL COMPANYS TO COMPANY ARRAY
-    [self.companyList addObject:apple];
-    [self.companyList addObject:google];
-    [self.companyList addObject:tesla];
-    [self.companyList addObject:ford];
+    [self.companyList addObject:[self convertManagedCompanyToCIC:apple]];
+    [self.companyList addObject:[self convertManagedCompanyToCIC:google]];
+    [self.companyList addObject:[self convertManagedCompanyToCIC:tesla]];
+    [self.companyList addObject:[self convertManagedCompanyToCIC:ford]];
     
-    
+    [self saveChanges];
    }
+
+-(void)saveChanges
+{
+    NSError *error = nil;
+    BOOL successful = [_managedObjectContext save:&error];
+    if (!successful)
+    {
+        NSLog(@"Error saving: %@", [error localizedDescription]);
+    }
+    NSLog(@"Data saved");
+}
+
 
 -(void)addNewCompanyToList:(NSString *)companyName
               companyImage:(NSString *)companyImage
@@ -349,18 +380,76 @@
     // Save to Disk
     [self saveChanges];
     
-    [self.companyList addObject:companyInfo];
+    [self.companyList addObject:[self convertManagedCompanyToCIC: companyInfo]];
 }
 
--(void)saveChanges
+-(void)updateCompanyInfo:(NSString *)companyName
+   updateCompanyImageURL:(NSString *)companyImageURL
+     updateCompanyTicker:(NSString *)companyTicker
+                 company:(companyInfoClass *)company
 {
+        // Fetch the company from the core data
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Company" inManagedObjectContext:_managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    // Create Predicate
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @"companyName", company.companyName];
+    [fetchRequest setPredicate:predicate];
+    
     NSError *error = nil;
-    BOOL successful = [_managedObjectContext save:&error];
-    if (!successful)
+    NSArray *fetchedObjects = [_managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    if (fetchedObjects == nil)
     {
-        NSLog(@"Error saving: %@", [error localizedDescription]);
+        NSLog(@"Could not fetch the objects");
     }
-    NSLog(@"Data saved");
+    
+    else {
+        if ([fetchedObjects count] > 0) {
+            Company *targetCompany = fetchedObjects[0];
+            targetCompany.companyName = companyName;
+            targetCompany.companyImageName = companyImageURL;
+            targetCompany.companyTicker = companyTicker;
+            
+            [self saveChanges];
+        }
+        
+        
+        
+    }
+    
+//    [self saveChanges];
+    company.companyName = companyName;
+    company.companyImageName = companyImageURL;
+    company.companyTicker = companyTicker;
+    
+
+    
+}
+
+-(void)deleteCompany:(companyInfoClass *)company
+{
+    // Fetch the company from the core data first
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Company" inManagedObjectContext:_managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    NSError *error = nil;
+    NSArray *fethchedObjects = [_managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    if (fethchedObjects == nil)
+    {
+        NSLog(@"Could not delete Entity objects");
+    }
+    for (Company *targetCompany in fethchedObjects) {
+        if (targetCompany.companyName == company.companyName)
+            [_managedObjectContext deleteObject:targetCompany];
+    }
+   
+    
+    [self.companyList removeObject:company];
+    
+    [self saveChanges];
+    
 }
 
 
@@ -380,16 +469,6 @@
     [companyInfo.productsArray addObject:productInfo];
 }
 
--(void)updateCompanyInfo:(NSString *)companyName
-   updateCompanyImageURL:(NSString *)companyImageURL
-     updateCompanyTicker:(NSString *)companyTicker
-                 company:(companyInfoClass *)company
-{
-    company.companyName = companyName;
-    company.companyImageName = companyImageURL;
-    company.companyTicker = companyTicker;
-    
-}
 
 -(void)updateProductInfo:(NSString *)productName
         updateProductURL:(NSString *)productURL
@@ -410,7 +489,7 @@
     
     int i = 0;
     for (i = 0; i < [_companyList count]; i++) {
-        Company *temp = _companyList[i];
+        companyInfoClass *temp = _companyList[i];
         NSString *tempTicker = temp.companyTicker;
         
         tickersString = [tickersString stringByAppendingString:tempTicker];

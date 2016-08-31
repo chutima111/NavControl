@@ -18,7 +18,7 @@
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
-@property (nonatomic,strong) NSMutableArray *companyList;
+@property (nonatomic,strong) NSMutableArray<companyInfoClass *> *companyList;
 
 -(void)createCompaniesAndProducts;
 -(void)addNewCompanyToList:(NSString *)companyName
@@ -42,6 +42,8 @@
              productInfo:(productClass *)productInfo;
 
 -(void)getStockPrice;
+
+-(void)deleteCompany:(companyInfoClass *)company;
 
 
 +(DAO *)sharedInstance;
