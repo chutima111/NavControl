@@ -10,4 +10,15 @@
 
 @implementation productClass
 
+-(instancetype)initWithID:(companyInfoClass *)company
+{
+    self = [super init];
+    if (self) {
+        self.companyID = company.companyID;
+    }
+    
+    return self;
+}
+
+
 @end

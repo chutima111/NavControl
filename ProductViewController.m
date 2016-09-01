@@ -147,8 +147,10 @@
     // Pass the selected object to the new view controller.
     productClass *product = self.company.productsArray[indexPath.row];
     
+    
     // Create the product reference to the new view controller
     detailViewController.product = product;
+    detailViewController.company = _company;
     
     
     
@@ -172,6 +174,9 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        [[DAO sharedInstance]deleteProduct:self.company.productsArray[indexPath.row]];
+        
         // Delete the row from the data source
         [self.company.productsArray removeObjectAtIndex:indexPath.row];
         

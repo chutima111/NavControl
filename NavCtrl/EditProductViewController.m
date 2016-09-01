@@ -143,6 +143,11 @@
 - (IBAction)deleteButtonPressed:(id)sender {
     
     [self UITextFieldClearAll];
+    [[DAO sharedInstance] deleteProduct:self.product];
+    [self.company.productsArray removeObject:self.product];
+    
+    [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
 

@@ -21,20 +21,25 @@
 @property (nonatomic,strong) NSMutableArray<companyInfoClass *> *companyList;
 
 -(void)createCompaniesAndProducts;
+
 -(void)addNewCompanyToList:(NSString *)companyName
               companyImage:(NSString *)companyImage
-             companyTicker:(NSString *)companyTicker;
+             companyTicker:(NSString *)companyTicker
+             productsArray:(NSMutableArray *)productsArray;
 
+-(void)updateCompanyInfo:(NSString *)companyName
+   updateCompanyImageURL:(NSString *)companyImageURL
+     updateCompanyTicker:(NSString *)companyTicker
+                 company:(companyInfoClass *)company;
 
 -(void)addNewProductToList:(NSString *)productName
            productImageURL:(NSString *)productImageURL
                 productURL:(NSString *)productURL
                companyInfo:(companyInfoClass *)companyInfo;
 
--(void)updateCompanyInfo:(NSString *)companyName
-   updateCompanyImageURL:(NSString *)companyImageURL
-     updateCompanyTicker:(NSString *)companyTicker
-                 company:(companyInfoClass *)company;
+-(void)deleteProduct:(productClass *)product;
+
+
 
 -(void)updateProductInfo:(NSString *)productName
         updateProductURL:(NSString *)productURL

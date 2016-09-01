@@ -100,7 +100,8 @@
 {
     [[DAO sharedInstance] addNewCompanyToList:self.txfCompanyName.text
                                  companyImage:self.txfCompanyImageUrl.text
-                                companyTicker:self.txfCompanyTicker.text];
+                                companyTicker:self.txfCompanyTicker.text
+                                productsArray:[NSMutableArray array]];
      
     
     

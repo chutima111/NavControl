@@ -15,5 +15,9 @@
 @property (nonatomic, strong) NSString *companyTicker;
 @property (nonatomic, strong) NSString *stockPrice;
 @property (nonatomic, strong) NSMutableArray *productsArray;
+@property int companyID;
+
+-(instancetype)init;
+-(instancetype)initWithId:(int)companyId;
 
 @end

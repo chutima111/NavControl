@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "detailsViewController.h"
 #import "companyInfoClass.h"
+#import "DAO.h"
 
 
 @interface ProductViewController : UITableViewController

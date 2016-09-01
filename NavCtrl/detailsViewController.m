@@ -60,6 +60,7 @@
     
     // Create the product reference to the next view controller
     editProductViewController.product = self.product;
+    editProductViewController.company = self.company;
 
     
     [self.navigationController pushViewController:editProductViewController animated:YES];

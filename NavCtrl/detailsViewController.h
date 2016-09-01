@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <WebKit/WebKit.h>
 #import "productClass.h"
+#import "companyInfoClass.h"
 
 @interface detailsViewController : UIViewController
 
@@ -16,5 +17,7 @@
 @property (nonatomic, strong) WKWebView *webView;
 
 @property (nonatomic, strong) productClass *product;
+@property (nonatomic, strong) companyInfoClass *company;
+
 
 @end

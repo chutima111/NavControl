@@ -113,21 +113,50 @@
         [self setCompanyList:companiesArray];
     }
     
+#pragma mark convenient method
+    
 }
 
 -(companyInfoClass*)convertManagedCompanyToCIC:(Company *) company{
-    companyInfoClass *theCompany = [[companyInfoClass alloc]init];
+    companyInfoClass *theCompany = [[companyInfoClass alloc]initWithId:[company.companyID intValue]];
     theCompany.companyName = company.companyName;
     theCompany.companyImageName = company.companyImageName;
     theCompany.companyTicker = company.companyTicker;
+//    theCompany.companyID = [company.companyID intValue];
     theCompany.productsArray = [[NSMutableArray alloc]init];
     for (Product *product in company.products) {
         productClass *product1 = [[productClass alloc] init];
         product1.productName = product.productName;
         product1.productImage = product.productImage;
         product1.productUrl = product.productURL;
+        product1.companyID = [product.companyID intValue];
         [theCompany.productsArray addObject:product1];
     }
+    return theCompany;
+}
+
+-(Company *)convertCompanyInfoClassToManagedCompany:(companyInfoClass *)company
+{
+    Company *theCompany = [NSEntityDescription insertNewObjectForEntityForName:@"Company" inManagedObjectContext:_managedObjectContext];
+    theCompany.companyName = company.companyName;
+    theCompany.companyImageName = company.companyImageName;
+    theCompany.companyTicker = company.companyTicker;
+    theCompany.companyID = @(company.companyID);
+//    theCompany.products = [NSSet setWithArray:company.productsArray];
+    NSMutableArray *tempProductsArray = [NSMutableArray array];
+    for (productClass *product in company.productsArray)
+    {
+        Product *theProduct = [NSEntityDescription insertNewObjectForEntityForName:@"Product" inManagedObjectContext:_managedObjectContext];
+        theProduct.productName = product.productName;
+        theProduct.productImage = product.productImage;
+        theProduct.productURL = product.productUrl;
+        theProduct.companyID = @(product.companyID);
+        
+        [tempProductsArray addObject:theProduct];
+//        [theCompany setProducts:[NSSet setWithObject:theProduct]];
+    }
+    
+    [theCompany setProducts:[NSSet setWithArray:tempProductsArray]];
     return theCompany;
 }
 
@@ -138,11 +167,12 @@
     // Test : create default value for company in core data
     
     // Apple company
-    Company *apple = [NSEntityDescription insertNewObjectForEntityForName:@"Company" inManagedObjectContext:_managedObjectContext];
+/*    Company *apple = [NSEntityDescription insertNewObjectForEntityForName:@"Company" inManagedObjectContext:_managedObjectContext];
     
     [apple setCompanyName:@"Apple Inc"];
     [apple setCompanyImageName:@"Apple Inc"];
     [apple setCompanyTicker:@"AAPL"];
+    
     
     Product *iPhone = [NSEntityDescription insertNewObjectForEntityForName:@"Product" inManagedObjectContext:_managedObjectContext];
     [iPhone setProductName:@"iPhone"];
@@ -165,98 +195,27 @@
 //    [iPod setValue:apple forKey:@"company"];
 //    
     [apple setProducts:[NSSet setWithObjects:iPhone, iPad, iPod, nil]];
+  */  
     
-    
-    
-    // Google company
-    Company *google = [NSEntityDescription insertNewObjectForEntityForName:@"Company" inManagedObjectContext:_managedObjectContext];
-    
-    [google setCompanyName:@"Google"];
-    [google setCompanyImageName:@"googleLogoImage"];
-    [google setCompanyTicker:@"GOOG"];
-    
-    Product *gmail = [NSEntityDescription insertNewObjectForEntityForName:@"Product" inManagedObjectContext:_managedObjectContext];
-    [gmail setProductName:@"Gmail"];
-    [gmail setProductImage:@"gmailLogoImage"];
-    [gmail setProductURL:@"https://www.google.com/gmail/about/"];
-    
-    Product *googleMaps = [NSEntityDescription insertNewObjectForEntityForName:@"Product" inManagedObjectContext:_managedObjectContext];
-    [googleMaps setProductName:@"Google Maps"];
-    [googleMaps setProductImage:@"googleMapsLogoImage"];
-    [googleMaps setProductURL:@"https://maps.google.com/"];
-    
-    // Then add products to Google company
-    [google setProducts:[NSSet setWithObjects:gmail, googleMaps, nil]];
-    
-    // Tesla company
-    Company *tesla = [NSEntityDescription insertNewObjectForEntityForName:@"Company" inManagedObjectContext:_managedObjectContext];
-    
-    [tesla setCompanyName:@"Tesla"];
-    [tesla setCompanyImageName:@"teslaLogoImage"];
-    [tesla setCompanyTicker:@"TSLA"];
-    
-    Product *teslaModelS = [NSEntityDescription insertNewObjectForEntityForName:@"Product" inManagedObjectContext:_managedObjectContext];
-    [teslaModelS setProductName:@"Tesla Model S"];
-    [teslaModelS setProductImage:@"teslaModelSImage"];
-    [teslaModelS setProductURL:@"https://www.tesla.com/models"];
-    
-    Product *teslaModelX = [NSEntityDescription insertNewObjectForEntityForName:@"Product" inManagedObjectContext:_managedObjectContext];
-    [teslaModelX setProductName:@"Tesla Model X"];
-    [teslaModelX setProductImage:@"teslaModelXImage"];
-    [teslaModelX setProductURL:@"https://www.tesla.com/modelx"];
-    
-    Product *teslaModel3 = [NSEntityDescription insertNewObjectForEntityForName:@"Product" inManagedObjectContext:_managedObjectContext];
-    [teslaModel3 setProductName:@"Tesla Model 3"];
-    [teslaModel3 setProductImage:@"teslaModel3Image"];
-    [teslaModel3 setProductURL:@"https://www.tesla.com/model3"];
-    
-    // Add products to Tesla company
-    [tesla setProducts:[NSSet setWithObjects:teslaModelS, teslaModelX, teslaModel3, nil]];
-    
-    // Ford company
-    Company *ford = [NSEntityDescription insertNewObjectForEntityForName:@"Company" inManagedObjectContext:_managedObjectContext];
-    [ford setCompanyName:@"Ford"];
-    [ford setCompanyImageName:@"fordLogoImage"];
-    [ford setCompanyTicker:@"F"];
-    
-    Product *fordFiesta = [NSEntityDescription insertNewObjectForEntityForName:@"Product" inManagedObjectContext:_managedObjectContext];
-    [fordFiesta setProductName:@"Ford Fiesta"];
-    [fordFiesta setProductImage:@"fordFiestaImage"];
-    [fordFiesta setProductURL:@"http://www.ford.com/cars/fiesta/"];
-    
-    Product *fordFocus = [NSEntityDescription insertNewObjectForEntityForName:@"Product" inManagedObjectContext:_managedObjectContext];
-    [fordFocus setProductName:@"Ford Focus"];
-    [fordFocus setProductImage:@"fordFocusImage"];
-    [fordFocus setProductURL:@"http://www.ford.com/cars/focus/"];
-    
-    Product *fordMustang = [NSEntityDescription insertNewObjectForEntityForName:@"Product" inManagedObjectContext:_managedObjectContext];
-    [fordMustang setProductName:@"Ford Mustang"];
-    [fordMustang setProductImage:@"fordMustangImage"];
-    [fordMustang setProductURL:@"http://www.ford.com/cars/mustang/"];
-    
-    // Add products to Ford company;
-    [ford setProducts:[NSSet setWithObjects:fordFiesta, fordFocus, fordMustang, nil]];
-    
-    
-    
+ 
     // Create all default value for companies
-/*    companyInfoClass *apple = [[companyInfoClass alloc]init];
-    apple.companyName = @"Apple mobile devices";
-    apple.companyImageName = @"appleLogoImage";
+    companyInfoClass *apple = [[companyInfoClass alloc]init];
+    apple.companyName = @"Apple Inc";
+    apple.companyImageName = @"Apple Inc";
     apple.companyTicker = @"AAPL";
     apple.productsArray = [NSMutableArray array];
     
-    productClass *iPhone = [[productClass alloc] init];
+    productClass *iPhone = [[productClass alloc] initWithID:apple];
     iPhone.productName = @"iPhone";
     iPhone.productImage = @"iPhoneImage";
     iPhone.productUrl = @"http://www.apple.com/iphone/";
     
-    productClass *iPad = [[productClass alloc] init];
+    productClass *iPad = [[productClass alloc] initWithID:apple];
     iPad.productName = @"iPad";
     iPad.productImage = @"iPadImage";
     iPad.productUrl = @"http://www.apple.com/ipad/";
     
-    productClass *iPod = [[productClass alloc] init];
+    productClass *iPod = [[productClass alloc] initWithID:apple];
     iPod.productName = @"iPod";
     iPod.productImage = @"iPodImage";
     iPod.productUrl = @"http://www.apple.com/ipod/";
@@ -274,12 +233,12 @@
     google.companyTicker = @"GOOG";
     google.productsArray = [NSMutableArray array];
     
-    productClass *googleGmail = [[productClass alloc]init];
+    productClass *googleGmail = [[productClass alloc]initWithID:google];
     googleGmail.productName = @"Gmail";
     googleGmail.productImage = @"gmailLogoImage";
     googleGmail.productUrl = @"https://www.google.com/gmail/about/";
     
-    productClass *googleMaps = [[productClass alloc]init];
+    productClass *googleMaps = [[productClass alloc]initWithID:google];
     googleMaps.productName = @"Google Maps";
     googleMaps.productImage = @"googleMapsLogoImage";
     googleMaps.productUrl = @"https://maps.google.com/";
@@ -295,17 +254,17 @@
     tesla.companyTicker = @"TSLA";
     tesla.productsArray = [NSMutableArray array];
     
-    productClass *teslaModelS = [[productClass alloc]init];
+    productClass *teslaModelS = [[productClass alloc]initWithID:tesla];
     teslaModelS.productName = @"Model S";
     teslaModelS.productImage = @"teslaModelSImage";
     teslaModelS.productUrl = @"https://www.tesla.com/models";
     
-    productClass *teslaModelX = [[productClass alloc] init];
+    productClass *teslaModelX = [[productClass alloc] initWithID:tesla];
     teslaModelX.productName = @"Model X";
     teslaModelX.productImage = @"teslaModelXImage";
     teslaModelX.productUrl = @"https://www.tesla.com/modelx";
     
-    productClass *teslaModel3 = [[productClass alloc] init];
+    productClass *teslaModel3 = [[productClass alloc] initWithID:tesla];
     teslaModel3.productName = @"Model 3";
     teslaModel3.productImage = @"teslaModel3Image";
     teslaModel3.productUrl = @"https://www.tesla.com/model3";
@@ -322,17 +281,17 @@
     ford.companyTicker = @"F";
     ford.productsArray = [NSMutableArray array];
     
-    productClass *fordFiesta = [[productClass alloc]init];
+    productClass *fordFiesta = [[productClass alloc]initWithID:ford];
     fordFiesta.productName = @"Fiesta";
     fordFiesta.productImage = @"fordFiestaImage";
     fordFiesta.productUrl = @"http://www.ford.com/cars/fiesta/";
     
-    productClass *fordFocus = [[productClass alloc]init];
+    productClass *fordFocus = [[productClass alloc]initWithID:ford];
     fordFocus.productName = @"Focus";
     fordFocus.productImage = @"fordFocusImage";
     fordFocus.productUrl = @"http://www.ford.com/cars/focus/";
     
-    productClass *fordMustang = [[productClass alloc]init];
+    productClass *fordMustang = [[productClass alloc]initWithID:ford];
     fordMustang.productName = @"Mustang";
     fordMustang.productImage = @"fordMustangImage";
     fordMustang.productUrl = @"http://www.ford.com/cars/mustang/";
@@ -341,18 +300,25 @@
     [ford.productsArray addObject:fordFiesta];
     [ford.productsArray addObject:fordFocus];
     [ford.productsArray addObject:fordMustang];
- */
+ 
     
     
     self.companyList = [NSMutableArray array];
     
     // ADD ALL COMPANYS TO COMPANY ARRAY
-    [self.companyList addObject:[self convertManagedCompanyToCIC:apple]];
-    [self.companyList addObject:[self convertManagedCompanyToCIC:google]];
-    [self.companyList addObject:[self convertManagedCompanyToCIC:tesla]];
-    [self.companyList addObject:[self convertManagedCompanyToCIC:ford]];
+    [self.companyList addObject:apple];
+    [self.companyList addObject:google];
+    [self.companyList addObject:tesla];
+    [self.companyList addObject:ford];
+    
+    // Create the managed objects and add it in core data
+    
+    for (companyInfoClass *company in self.companyList) {
+        Company *theCompany = [self convertCompanyInfoClassToManagedCompany:company];
+    }
     
     [self saveChanges];
+    
    }
 
 -(void)saveChanges
@@ -370,17 +336,21 @@
 -(void)addNewCompanyToList:(NSString *)companyName
               companyImage:(NSString *)companyImage
              companyTicker:(NSString *)companyTicker
+             productsArray:(NSMutableArray *)productsArray
 
 {
-    Company *companyInfo = [NSEntityDescription insertNewObjectForEntityForName:@"Company" inManagedObjectContext:_managedObjectContext];
-    [companyInfo setCompanyName:companyName];
-    [companyInfo setCompanyImageName:companyImage];
-    [companyInfo setCompanyTicker:companyTicker];
+    companyInfoClass *newCompany = [[companyInfoClass alloc]init];
+    newCompany.companyName = companyName;
+    newCompany.companyImageName = companyImage;
+    newCompany.companyTicker = companyTicker;
+    newCompany.productsArray = [NSMutableArray array];
+    
+    [self.companyList addObject:newCompany];
     
     // Save to Disk
-    [self saveChanges];
+    [self convertCompanyInfoClassToManagedCompany:newCompany];
     
-    [self.companyList addObject:[self convertManagedCompanyToCIC: companyInfo]];
+    [self saveChanges];
 }
 
 -(void)updateCompanyInfo:(NSString *)companyName
@@ -394,7 +364,7 @@
     [fetchRequest setEntity:entity];
     
     // Create Predicate
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @"companyName", company.companyName];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %d", @"companyID", company.companyID];
     [fetchRequest setPredicate:predicate];
     
     NSError *error = nil;
@@ -414,16 +384,12 @@
             [self saveChanges];
         }
         
-        
-        
     }
-    
-//    [self saveChanges];
+
     company.companyName = companyName;
     company.companyImageName = companyImageURL;
     company.companyTicker = companyTicker;
     
-
     
 }
 
@@ -441,7 +407,7 @@
         NSLog(@"Could not delete Entity objects");
     }
     for (Company *targetCompany in fethchedObjects) {
-        if (targetCompany.companyName == company.companyName)
+        if ([targetCompany.companyID intValue] == company.companyID)
             [_managedObjectContext deleteObject:targetCompany];
     }
    
@@ -462,11 +428,41 @@
     productInfo.productName = productName;
     productInfo.productImage = productImageURL;
     productInfo.productUrl = productURL;
+    productInfo.companyID = companyInfo.companyID;
     
-    if (companyInfo.productsArray == nil)
+    if (companyInfo.productsArray == nil) {
         companyInfo.productsArray = [NSMutableArray array];
-    
+    }
     [companyInfo.productsArray addObject:productInfo];
+    
+    // Create managed object, product in Core data
+    Product *newProduct = [NSEntityDescription insertNewObjectForEntityForName:@"Product" inManagedObjectContext:_managedObjectContext];
+    newProduct.productName = productName;
+    newProduct.productImage = productImageURL;
+    newProduct.productURL = productURL;
+    newProduct.companyID = @(companyInfo.companyID);
+    
+    // Add product to company managed object
+    // First, fetch the company from the model
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Company" inManagedObjectContext:_managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    NSError *error = nil;
+    NSArray *fethchedObjects = [_managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    if (fethchedObjects == nil)
+    {
+        NSLog(@"Could not delete Entity objects");
+    }
+    for (Company *targetCompany in fethchedObjects) {
+        if ([targetCompany.companyID intValue] == productInfo.companyID)
+           
+           [targetCompany addProducts:[NSSet setWithObject:newProduct]];
+    }
+    
+    [self saveChanges];
+
+    
 }
 
 
@@ -475,10 +471,74 @@
    updateProductImageURL:(NSString *)productImageURL
              productInfo:(productClass *)productInfo
 {
+    // Fetch that product from the data first
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Product" inManagedObjectContext:_managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    // Create Predicate
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %d", @"companyID", productInfo.companyID];
+    [fetchRequest setPredicate:predicate];
+    
+        NSError *error = nil;
+    NSArray *fetchedObjects = [_managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    if (fetchedObjects == nil)
+    {
+        NSLog(@"Could not fetch the objects");
+    }
+    
+    else {
+            for (Product *targetProduct in fetchedObjects) {
+                if ([targetProduct.productName isEqualToString:productInfo.productName]) {
+            
+            targetProduct.productName = productName;
+            targetProduct.productImage = productImageURL;
+            targetProduct.productURL = productURL;
+                    
+                }
+            }
+            
+            [self saveChanges];
+        }
+        
+    
+    // update product info to product object class
     productInfo.productName = productName;
     productInfo.productUrl = productURL;
     productInfo.productImage = productImageURL;
 }
+
+-(void)deleteProduct:(productClass *)product
+{
+    // Fetch that product from the data first
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Product" inManagedObjectContext:_managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    // Create Predicate, by finding the product id
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %d", @"companyID", product.companyID];
+    [fetchRequest setPredicate:predicate];
+    
+    NSError *error = nil;
+    // This fetchedObjects should have all the products that have same id
+    NSArray *fetchedObjects = [_managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    if (fetchedObjects == nil)
+    {
+        NSLog(@"Could not find the product object");
+    }
+    else {
+        for (Product *targetProduct in fetchedObjects) {
+            if ([targetProduct.productName isEqualToString:product.productName]) {
+                [_managedObjectContext deleteObject:targetProduct];
+            }
+        }
+        [self saveChanges];
+    }
+    
+   
+}
+
+
 
 -(void)getStockPrice
 {

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "productClass.h"
+#import "companyInfoClass.h"
 
 @interface EditProductViewController : UIViewController
 @property (retain, nonatomic) IBOutlet UITextField *txfProductName;
@@ -15,5 +16,6 @@
 @property (retain, nonatomic) IBOutlet UITextField *txfProductImageURL;
 
 @property (nonatomic, strong) productClass *product;
+@property (nonatomic, strong) companyInfoClass *company;
 
 @end
