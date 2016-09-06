@@ -14,6 +14,8 @@
 		207810F21D7231D1002E8560 /* Company+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 207810ED1D7231D0002E8560 /* Company+CoreDataProperties.m */; };
 		207810F31D7231D1002E8560 /* Company.m in Sources */ = {isa = PBXBuildFile; fileRef = 207810EF1D7231D1002E8560 /* Company.m */; };
 		207810F51D74C92F002E8560 /* Apple Inc.png in Resources */ = {isa = PBXBuildFile; fileRef = 207810F41D74C92F002E8560 /* Apple Inc.png */; };
+		207811081D7F3DCA002E8560 /* CompanyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 207811061D7F3DCA002E8560 /* CompanyTableViewCell.m */; };
+		207811091D7F3DCA002E8560 /* CompanyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 207811071D7F3DCA002E8560 /* CompanyTableViewCell.xib */; };
 		20C792431D5C20F0000A0015 /* detailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20C792411D5C20F0000A0015 /* detailsViewController.m */; };
 		20C792441D5C20F0000A0015 /* detailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20C792421D5C20F0000A0015 /* detailsViewController.xib */; };
 		20C792461D5CDEE5000A0015 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20C792451D5CDEE5000A0015 /* WebKit.framework */; };
@@ -69,6 +71,9 @@
 		207810EE1D7231D0002E8560 /* Company.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Company.h; sourceTree = "<group>"; };
 		207810EF1D7231D1002E8560 /* Company.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Company.m; sourceTree = "<group>"; };
 		207810F41D74C92F002E8560 /* Apple Inc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Apple Inc.png"; path = "Images.xcassets/Apple Inc.imageset/Apple Inc.png"; sourceTree = "<group>"; };
+		207811051D7F3DCA002E8560 /* CompanyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompanyTableViewCell.h; sourceTree = "<group>"; };
+		207811061D7F3DCA002E8560 /* CompanyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompanyTableViewCell.m; sourceTree = "<group>"; };
+		207811071D7F3DCA002E8560 /* CompanyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CompanyTableViewCell.xib; sourceTree = "<group>"; };
 		20C792401D5C20F0000A0015 /* detailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = detailsViewController.h; sourceTree = "<group>"; };
 		20C792411D5C20F0000A0015 /* detailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = detailsViewController.m; sourceTree = "<group>"; };
 		20C792421D5C20F0000A0015 /* detailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = detailsViewController.xib; sourceTree = "<group>"; };
@@ -206,6 +211,9 @@
 			children = (
 				48A656E318163C1B00746D36 /* CompanyViewController.h */,
 				48A656E418163C1B00746D36 /* CompanyViewController.m */,
+				207811051D7F3DCA002E8560 /* CompanyTableViewCell.h */,
+				207811061D7F3DCA002E8560 /* CompanyTableViewCell.m */,
+				207811071D7F3DCA002E8560 /* CompanyTableViewCell.xib */,
 			);
 			name = ParentViewController;
 			sourceTree = "<group>";
@@ -395,6 +403,7 @@
 				20C792481D5CF25C000A0015 /* Launch Screen.storyboard in Resources */,
 				207810F51D74C92F002E8560 /* Apple Inc.png in Resources */,
 				20C7926A1D6B4E9B000A0015 /* EditCompanyViewController.xib in Resources */,
+				207811091D7F3DCA002E8560 /* CompanyTableViewCell.xib in Resources */,
 				48A656EE1816468000746D36 /* Sunflower.gif in Resources */,
 				48A656E718163C1B00746D36 /* CompanyViewController.xib in Resources */,
 				20C792641D661343000A0015 /* AddNewProductViewController.xib in Resources */,
@@ -422,6 +431,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				20C7924B1D5FD1A0000A0015 /* companyInfoClass.m in Sources */,
+				207811081D7F3DCA002E8560 /* CompanyTableViewCell.m in Sources */,
 				48A656E618163C1B00746D36 /* CompanyViewController.m in Sources */,
 				48A656C518163BF200746D36 /* NavControllerAppDelegate.m in Sources */,
 				20C7924E1D5FD235000A0015 /* productClass.m in Sources */,

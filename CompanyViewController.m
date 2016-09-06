@@ -14,6 +14,8 @@
 #import "AddNewCompanyViewController.h"
 #import "EditCompanyViewController.h"
 
+#import "CompanyTableViewCell.h"
+
 
 
 
@@ -90,6 +92,7 @@
                                                object:nil];
     
     [self.dao getStockPrice];
+    
 }
 
 
@@ -171,33 +174,35 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    // Create custom tabel view cell
+    
+    static NSString *cellIdentifier = @"CompanyTableViewCell";
+    
+    CompanyTableViewCell *cell =  [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-        
+        // Load the top-level objects from the custom cell XIB.
+        NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"CompanyTableViewCell" owner:self options:nil];
+        // Grab a pointer to the first object (presumably the custom cell, as that's all the XIB should contain).
+        cell = [topLevelObjects objectAtIndex:0];
     }
+
     
     // Configure the cell...
-    companyInfoClass *company = [self.companies objectAtIndex:[indexPath row]];
     
-    cell.textLabel.text = company.companyName;
+    companyInfoClass *company = [self.companies objectAtIndex:indexPath.row];
+    cell.lblCompanyName.text = company.companyName;
+    cell.lblStockPrice.text = [NSString stringWithFormat:@"$ %@", company.stockPrice];
+    cell.imgCompany.image = [UIImage imageNamed:company.companyImageName];
     
-    // set images all the same size
-    UIImage *unscaledImage = [UIImage imageNamed:company.companyImageName];
-    cell.imageView.image = [self reSizeImage:unscaledImage toSize:CGSizeMake(50,50)];
-    
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"$ %@", company.stockPrice];
-    
-    // cell.imageView.image will be nil because it can not find the mathch in Images.xcassets
-    // then we search through the document directory
-    if (unscaledImage == nil) {
+    if (cell.imageView.image == nil) {
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *documentsDirectory = [paths objectAtIndex:0];
         NSString *path = [documentsDirectory stringByAppendingPathComponent:company.companyName];
         UIImage *image = [UIImage imageWithContentsOfFile:path];
         
         cell.imageView.image = image;
+
     }
     
     // ADD accessory type to be able to edit the cell
@@ -263,7 +268,7 @@
 // In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // if tabel view is on editing mode
+    // if table view is on editing mode
     // I want to be able to select the cell and do something with it
     if (tableView.editing == YES) {
         
@@ -303,11 +308,7 @@
     return reSizeImage;
 }
 
-- (void)dealloc {
-    [_btnUndo release];
-    [_btnRedo release];
-    [super dealloc];
-}
+
 - (IBAction)undoButtonPressed:(id)sender {
     
     [[DAO sharedInstance] undoLastAction];
@@ -323,5 +324,11 @@
     self.companies = self.dao.companyList;
     [self.dao getStockPrice];
     [self.tableView reloadData];
+}
+
+- (void)dealloc {
+    [_btnUndo release];
+    [_btnRedo release];
+    [super dealloc];
 }
 @end
