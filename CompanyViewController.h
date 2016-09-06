@@ -7,15 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
 
 @class ProductViewController;
 @class AddNewCompanyViewController;
 
-@interface CompanyViewController : UITableViewController
+@interface CompanyViewController : UIViewController
 
 @property (nonatomic, retain) NSMutableArray *companies;
 
 @property (nonatomic, retain) IBOutlet  ProductViewController * productViewController;
 
+@property (retain, nonatomic) IBOutlet UIButton *btnUndo;
+@property (retain, nonatomic) IBOutlet UIButton *btnRedo;
+- (IBAction)undoButtonPressed:(id)sender;
+- (IBAction)redoButtonPressed:(id)sender;
 
+@property (retain, nonatomic) IBOutlet UITableView *tableView;
 @end

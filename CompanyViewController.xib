@@ -3,34 +3,73 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CompanyViewController">
             <connections>
+                <outlet property="btnRedo" destination="9t5-jc-Udg" id="cFx-ef-Ofi"/>
+                <outlet property="btnUndo" destination="Twg-iN-svf" id="edc-oK-Qj2"/>
                 <outlet property="productViewController" destination="Xwu-Pd-0Xh" id="zKe-GD-Zeh"/>
-                <outlet property="view" destination="8" id="11"/>
+                <outlet property="tableView" destination="8" id="IKS-OA-ZiV"/>
+                <outlet property="view" destination="bKn-UP-3Lv" id="2n1-mF-XDX"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" bouncesZoom="NO" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="8">
-            <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
-            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-            <nil key="simulatedStatusBarMetrics"/>
-            <connections>
-                <outlet property="dataSource" destination="-1" id="9"/>
-                <outlet property="delegate" destination="-1" id="10"/>
-            </connections>
-            <point key="canvasLocation" x="275" y="283"/>
-        </tableView>
-        <viewController id="Xwu-Pd-0Xh" userLabel="ProductViewController" customClass="ProductViewController">
-            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
-        </viewController>
         <view contentMode="scaleToFill" id="bKn-UP-3Lv">
             <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <tableView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" bouncesZoom="NO" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="8">
+                    <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="9"/>
+                        <outlet property="delegate" destination="-1" id="10"/>
+                    </connections>
+                </tableView>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Twg-iN-svf">
+                    <rect key="frame" x="384" y="974" width="384" height="50"/>
+                    <color key="backgroundColor" white="0.73770448830000002" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="eoE-UX-pUT"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                    <state key="normal" title="Undo"/>
+                    <connections>
+                        <action selector="undoButtonPressed:" destination="-1" eventType="touchUpInside" id="bqK-5Z-w9A"/>
+                    </connections>
+                </button>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9t5-jc-Udg">
+                    <rect key="frame" x="0.0" y="974" width="384" height="50"/>
+                    <color key="backgroundColor" white="0.73770448830000002" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="f5o-br-iQe"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                    <state key="normal" title="Redo"/>
+                    <connections>
+                        <action selector="redoButtonPressed:" destination="-1" eventType="touchUpInside" id="fG0-gf-SK1"/>
+                    </connections>
+                </button>
+            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-            <point key="canvasLocation" x="365" y="172"/>
+            <constraints>
+                <constraint firstItem="8" firstAttribute="leading" secondItem="bKn-UP-3Lv" secondAttribute="leading" id="DWT-yI-Fje"/>
+                <constraint firstItem="9t5-jc-Udg" firstAttribute="leading" secondItem="bKn-UP-3Lv" secondAttribute="leading" id="GbD-U6-8eM"/>
+                <constraint firstAttribute="bottom" secondItem="8" secondAttribute="bottom" id="Gcs-bg-95D"/>
+                <constraint firstAttribute="bottom" secondItem="Twg-iN-svf" secondAttribute="bottom" id="Rdb-nv-Dom"/>
+                <constraint firstAttribute="trailing" secondItem="Twg-iN-svf" secondAttribute="trailing" id="YO1-PG-Wtf"/>
+                <constraint firstAttribute="trailing" secondItem="8" secondAttribute="trailing" id="atg-d0-GbT"/>
+                <constraint firstAttribute="bottom" secondItem="9t5-jc-Udg" secondAttribute="bottom" id="fQq-Xv-dm0"/>
+                <constraint firstItem="9t5-jc-Udg" firstAttribute="width" secondItem="bKn-UP-3Lv" secondAttribute="width" multiplier="1:2" id="rVw-Qi-bbl"/>
+                <constraint firstItem="8" firstAttribute="top" secondItem="bKn-UP-3Lv" secondAttribute="top" id="x4o-tJ-U52"/>
+                <constraint firstItem="Twg-iN-svf" firstAttribute="width" secondItem="bKn-UP-3Lv" secondAttribute="width" multiplier="1:2" id="yTA-52-IoN"/>
+            </constraints>
+            <point key="canvasLocation" x="-357" y="453"/>
         </view>
+        <viewController id="Xwu-Pd-0Xh" userLabel="ProductViewController" customClass="ProductViewController">
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
+        </viewController>
     </objects>
 </document>

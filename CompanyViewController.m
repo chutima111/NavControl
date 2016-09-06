@@ -17,14 +17,18 @@
 
 
 
-@interface CompanyViewController ()
+@interface CompanyViewController () <UITableViewDelegate, UITableViewDataSource>
+{
+    UIBarButtonItem *editButton;
+}
 
 @property (nonatomic, strong) DAO * dao;
+
 
 @end
 
 @implementation CompanyViewController
-
+/*
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -34,14 +38,14 @@
         
     }
     return self;
-}
+}*/
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     // Uncomment the following line to preserve selection between presentations.
-    self.clearsSelectionOnViewWillAppear = NO;
+//    self.tableView.clearsSelectionOnViewWillAppear = NO;
     
     
     // Set the navigation bar
@@ -51,6 +55,11 @@
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewCompany)];
     
     self.navigationItem.rightBarButtonItem = addButton;
+    
+    // Add the Done button in navigation bar
+    editButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(editButtonPressed)];
+    
+    self.navigationItem.leftBarButtonItem = editButton;
     
     // self.navigationController.navigationBar.hidden = NO;
     
@@ -63,6 +72,7 @@
     // Set the navigation title
     self.title = @"Watch List";
     
+       
     // ADD ALL THE COMPANIES
     
     self.dao = [DAO sharedInstance];
@@ -80,7 +90,6 @@
                                                object:nil];
     
     [self.dao getStockPrice];
-    
 }
 
 
@@ -108,7 +117,31 @@
 -(void) setEditing:(BOOL)editing animated:(BOOL)animated
 {
     // overide the edit navigationItem
-    [super setEditing:editing animated:animated];
+    [self.tableView setEditing:editing animated:animated];
+    
+    // set the buttons not hidden when editing mode
+    self.btnUndo.hidden = NO;
+    self.btnRedo.hidden = NO;
+}
+
+-(void)editButtonPressed
+{
+    if (self.tableView.editing == NO) {
+        
+        [editButton setTitle:@"Done"];
+        [self.tableView setEditing:YES animated:YES];
+        self.btnUndo.hidden = NO;
+        self.btnRedo.hidden = NO;
+        
+    } else {
+        
+        [editButton setTitle:@"Edit"];
+        [self.tableView setEditing:NO animated:NO];
+        self.btnUndo.hidden = YES;
+        self.btnRedo.hidden = YES;
+        [[DAO sharedInstance] saveChanges];
+    }
+    
 }
 
 -(void)insertNewCompany
@@ -116,6 +149,7 @@
     //Create the next view controller
     AddNewCompanyViewController *addNewCompanyViewController = [[AddNewCompanyViewController alloc] initWithNibName:@"AddNewCompanyViewController" bundle:nil];
     
+
     // Push the view controller
     [self.navigationController pushViewController:addNewCompanyViewController animated:YES];
 }
@@ -258,6 +292,7 @@
     
 }
 
+#pragma mark - Additional methods
 
 - (UIImage *)reSizeImage:(UIImage *)image toSize:(CGSize)reSize
 {
@@ -268,5 +303,25 @@
     return reSizeImage;
 }
 
+- (void)dealloc {
+    [_btnUndo release];
+    [_btnRedo release];
+    [super dealloc];
+}
+- (IBAction)undoButtonPressed:(id)sender {
+    
+    [[DAO sharedInstance] undoLastAction];
+    self.companies = [DAO sharedInstance].companyList;
+    [self.dao getStockPrice];
+    [self.tableView reloadData];
+    
+}
 
+- (IBAction)redoButtonPressed:(id)sender {
+    
+    [[DAO sharedInstance] redoLastUndo];
+    self.companies = self.dao.companyList;
+    [self.dao getStockPrice];
+    [self.tableView reloadData];
+}
 @end

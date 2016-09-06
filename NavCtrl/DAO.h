@@ -57,5 +57,11 @@
 
 -(void)reloadDataFromContext;
 
+-(void)saveChanges;
+
+-(void)undoLastAction;
+
+-(void)redoLastUndo;
+
 
 @end

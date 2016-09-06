@@ -332,6 +332,19 @@
     NSLog(@"Data saved");
 }
 
+-(void)undoLastAction
+{
+    [_managedObjectContext undo];
+    [self reloadDataFromContext];
+    
+}
+
+-(void)redoLastUndo
+{
+    [_managedObjectContext redo];
+    [self reloadDataFromContext];
+}
+
 
 -(void)addNewCompanyToList:(NSString *)companyName
               companyImage:(NSString *)companyImage
@@ -414,7 +427,7 @@
     
     [self.companyList removeObject:company];
     
-    [self saveChanges];
+//    [self saveChanges];
     
 }
 
@@ -507,6 +520,10 @@
     productInfo.productUrl = productURL;
     productInfo.productImage = productImageURL;
 }
+
+
+
+///Here Im typint something
 
 -(void)deleteProduct:(productClass *)product
 {
@@ -608,6 +625,8 @@
     
     return nil;
 }
+
+
 
 
 
