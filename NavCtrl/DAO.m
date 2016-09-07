@@ -102,9 +102,9 @@
         [NSException raise:@"Fetch Failed" format:@"Reason: %@", [error localizedDescription]];
     }
     
-    if ([fetchedObjects count] == 0) {
-        [self createCompaniesAndProducts];
-    } else {
+//    if ([fetchedObjects count] == 0) {
+//        [self createCompaniesAndProducts];
+     else {
         NSMutableArray *companiesArray = [[NSMutableArray alloc] init];
         for(Company *company in fetchedObjects){
             [companiesArray addObject:[self convertManagedCompanyToCIC:company]];
@@ -427,6 +427,7 @@
     
     [self.companyList removeObject:company];
     
+        
 //    [self saveChanges];
     
 }

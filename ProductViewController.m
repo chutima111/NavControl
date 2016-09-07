@@ -13,6 +13,7 @@
 
 
 
+
 @interface ProductViewController ()
 
 @end
@@ -48,7 +49,9 @@
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewProduct)];
     
     self.navigationItem.rightBarButtonItem = addButton;
- 
+    
+        
+    
    }
 
 - (void)viewWillAppear:(BOOL)animated {

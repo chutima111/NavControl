@@ -24,4 +24,7 @@
 - (IBAction)redoButtonPressed:(id)sender;
 
 @property (retain, nonatomic) IBOutlet UITableView *tableView;
+
+@property (retain, nonatomic) IBOutlet UIView *emptyView;
+
 @end

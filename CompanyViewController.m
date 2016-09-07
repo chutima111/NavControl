@@ -69,7 +69,9 @@
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:87.0/255 green:158.0/255 blue:38.0/255 alpha:1.0];
     
     // Set the navigation item to color
-    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
     
     // Set the navigation title
     self.title = @"Watch List";
@@ -90,10 +92,14 @@
                                              selector:@selector(refreshData)
                                                  name:@"StockDataReceived"
                                                object:nil];
-    
+    if ([self.companies count] == 0) {
+        self.emptyView.hidden = NO;
+    }
+    else {
     [self.dao getStockPrice];
+    }
     
-}
+    }
 
 
 
@@ -106,7 +112,13 @@
 {
     [super viewWillAppear:animated];
     
+    if ([self.companies count] == 0) {
+        self.emptyView.hidden = NO;
+    } else {
+        
+    self.emptyView.hidden = YES;
     [self.dao getStockPrice];
+    }
     
     [self.tableView reloadData];
 }
@@ -238,6 +250,10 @@
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }
     [tableView reloadData];
+    
+    if ([self.companies count] == 0) {
+        self.emptyView.hidden = NO;
+    }
 }
 
 
@@ -329,6 +345,7 @@
 - (void)dealloc {
     [_btnUndo release];
     [_btnRedo release];
+    [_emptyView release];
     [super dealloc];
 }
 @end
