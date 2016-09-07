@@ -14,28 +14,28 @@
 
 
 
-@interface ProductViewController ()
+@interface ProductViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @end
 
 @implementation ProductViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
+//- (id)initWithStyle:(UITableViewStyle)style
+//{
+//    self = [super initWithStyle:style];
+//    if (self) {
+//        // Custom initialization
+//    }
+//    return self;
+//}
+//
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
     // Uncomment the following line to preserve selection between presentations.
-     self.clearsSelectionOnViewWillAppear = NO;
+ //    self.clearsSelectionOnViewWillAppear = NO;
     
     // Set the navigation bar
     
@@ -50,13 +50,33 @@
     
     self.navigationItem.rightBarButtonItem = addButton;
     
-        
     
    }
 
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
+    
+    // Set up company Image, Name, Ticker on the top view
+    self.imgCompany.image = [UIImage imageNamed:self.company.companyName];
+    
+    if (self.imgCompany.image == nil) {
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        NSString *path = [documentsDirectory stringByAppendingPathComponent:self.company.companyName];
+        UIImage *image = [UIImage imageWithContentsOfFile:path];
+        
+        self.imgCompany.image = image;
+        
+    }
+    
+    self.lblNameAndTicker.text = [NSString stringWithFormat:@"%@ (%@)", self.company.companyName, self.company.companyTicker];
+    
+    // set the empty or bottom view hidded
+    self.bottomView.hidden = YES;
+    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+
     
         [self.tableView reloadData];
  
@@ -215,4 +235,12 @@
 
 
 
+- (void)dealloc {
+    [_tableView release];
+    [_topView release];
+    [_bottomView release];
+    [_imgCompany release];
+    [_lblNameAndTicker release];
+    [super dealloc];
+}
 @end

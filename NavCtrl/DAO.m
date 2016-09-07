@@ -102,9 +102,9 @@
         [NSException raise:@"Fetch Failed" format:@"Reason: %@", [error localizedDescription]];
     }
     
-//    if ([fetchedObjects count] == 0) {
-//        [self createCompaniesAndProducts];
-     else {
+    if ([fetchedObjects count] == 0) {
+        [self createCompaniesAndProducts];
+    }else {
         NSMutableArray *companiesArray = [[NSMutableArray alloc] init];
         for(Company *company in fetchedObjects){
             [companiesArray addObject:[self convertManagedCompanyToCIC:company]];
@@ -229,7 +229,7 @@
     // GROUP GOOGLE COMPANY AND ITS PRODUCTS
     companyInfoClass *google = [[companyInfoClass alloc] init];
     google.companyName = @"Google";
-    google.companyImageName = @"googleLogoImage";
+    google.companyImageName = @"Google";
     google.companyTicker = @"GOOG";
     google.productsArray = [NSMutableArray array];
     
@@ -250,7 +250,7 @@
     // GROUP TESLA COMPANY AND ITS PRODUCTS
     companyInfoClass *tesla = [[companyInfoClass alloc]init];
     tesla.companyName = @"Tesla";
-    tesla.companyImageName = @"teslaLogoImage";
+    tesla.companyImageName = @"Tesla";
     tesla.companyTicker = @"TSLA";
     tesla.productsArray = [NSMutableArray array];
     
@@ -277,7 +277,7 @@
     // GROUP FORD COMPANY AND ITS PRODUCTS
     companyInfoClass *ford = [[companyInfoClass alloc] init];
     ford.companyName = @"Ford";
-    ford.companyImageName = @"fordLogoImage";
+    ford.companyImageName = @"Ford";
     ford.companyTicker = @"F";
     ford.productsArray = [NSMutableArray array];
     

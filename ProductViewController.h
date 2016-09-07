@@ -12,8 +12,15 @@
 #import "DAO.h"
 
 
-@interface ProductViewController : UITableViewController
+@interface ProductViewController : UIViewController
 
 @property (nonatomic, strong) companyInfoClass *company;
+
+@property (retain, nonatomic) IBOutlet UITableView *tableView;
+
+@property (retain, nonatomic) IBOutlet UIView *topView;
+@property (retain, nonatomic) IBOutlet UIView *bottomView;
+@property (retain, nonatomic) IBOutlet UIImageView *imgCompany;
+@property (retain, nonatomic) IBOutlet UILabel *lblNameAndTicker;
 
 @end

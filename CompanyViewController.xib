@@ -118,22 +118,102 @@
         </view>
         <viewController id="Xwu-Pd-0Xh" userLabel="ProductViewController" customClass="ProductViewController">
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
+            <connections>
+                <outlet property="bottomView" destination="Fqh-Dg-RDs" id="GHe-8f-J8P"/>
+                <outlet property="imgCompany" destination="lLB-Mo-3fw" id="0kz-Co-H0n"/>
+                <outlet property="lblNameAndTicker" destination="oMN-af-qs0" id="j30-zE-KpV"/>
+                <outlet property="tableView" destination="qQV-DV-2HN" id="jcG-eh-A2c"/>
+                <outlet property="topView" destination="GaJ-RW-FLe" id="Sga-Ec-ACe"/>
+                <outlet property="view" destination="Q1a-TR-zvv" id="n78-iy-QTz"/>
+            </connections>
         </viewController>
         <view contentMode="scaleToFill" id="Q1a-TR-zvv">
             <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="40" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qQV-DV-2HN">
+                    <rect key="frame" x="0.0" y="512" width="768" height="512"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="sectionIndexBackgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <outlet property="dataSource" destination="Xwu-Pd-0Xh" id="Pfp-8n-q0f"/>
+                        <outlet property="delegate" destination="Xwu-Pd-0Xh" id="VLV-mL-HD8"/>
+                    </connections>
+                </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fqh-Dg-RDs" userLabel="bottomView">
+                    <rect key="frame" x="0.0" y="512" width="768" height="512"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="products to track" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NG1-R0-aBZ">
+                            <rect key="frame" x="0.0" y="248" width="768" height="18"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Add a few of this company's" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="miD-4K-cJ3">
+                            <rect key="frame" x="0.0" y="210" width="768" height="18"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="car-of-OKt">
+                            <rect key="frame" x="333" y="296" width="102" height="30"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                            <state key="normal" title="+ Add product"/>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="miD-4K-cJ3" secondAttribute="trailing" id="8ZY-QG-Thr"/>
+                        <constraint firstItem="miD-4K-cJ3" firstAttribute="leading" secondItem="Fqh-Dg-RDs" secondAttribute="leading" id="CCF-ZS-3Uv"/>
+                        <constraint firstAttribute="trailing" secondItem="NG1-R0-aBZ" secondAttribute="trailing" id="MM5-sd-lZt"/>
+                        <constraint firstItem="car-of-OKt" firstAttribute="centerX" secondItem="Fqh-Dg-RDs" secondAttribute="centerX" id="d54-uv-vwd"/>
+                        <constraint firstItem="NG1-R0-aBZ" firstAttribute="top" secondItem="miD-4K-cJ3" secondAttribute="bottom" constant="20" id="d7g-PR-RXn"/>
+                        <constraint firstItem="NG1-R0-aBZ" firstAttribute="leading" secondItem="Fqh-Dg-RDs" secondAttribute="leading" id="dud-A5-TZa"/>
+                        <constraint firstItem="NG1-R0-aBZ" firstAttribute="centerY" secondItem="Fqh-Dg-RDs" secondAttribute="centerY" id="fcJ-a5-pvr"/>
+                        <constraint firstItem="car-of-OKt" firstAttribute="top" secondItem="NG1-R0-aBZ" secondAttribute="bottom" constant="30" id="hmR-Tt-9Dk"/>
+                    </constraints>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GaJ-RW-FLe" userLabel="topView">
                     <rect key="frame" x="0.0" y="0.0" width="768" height="512"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lLB-Mo-3fw">
+                            <rect key="frame" x="334" y="207" width="100" height="100"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="lLB-Mo-3fw" secondAttribute="height" id="Dc9-p6-PgO"/>
+                                <constraint firstAttribute="height" constant="100" id="Rph-Pq-BgQ"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Company Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oMN-af-qs0">
+                            <rect key="frame" x="0.0" y="327" width="768" height="20"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="oMN-af-qs0" secondAttribute="trailing" id="5dh-gr-4sI"/>
+                        <constraint firstItem="lLB-Mo-3fw" firstAttribute="centerY" secondItem="GaJ-RW-FLe" secondAttribute="centerY" id="BFy-tY-Ikn"/>
+                        <constraint firstItem="oMN-af-qs0" firstAttribute="top" secondItem="lLB-Mo-3fw" secondAttribute="bottom" constant="20" id="Iei-Rp-dBl"/>
+                        <constraint firstItem="lLB-Mo-3fw" firstAttribute="centerX" secondItem="GaJ-RW-FLe" secondAttribute="centerX" id="VoX-Q9-Xf4"/>
+                        <constraint firstItem="oMN-af-qs0" firstAttribute="leading" secondItem="GaJ-RW-FLe" secondAttribute="leading" id="x6F-rQ-EGM"/>
+                    </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="GaJ-RW-FLe" firstAttribute="top" secondItem="Q1a-TR-zvv" secondAttribute="top" id="5U7-aR-Lbw"/>
+                <constraint firstAttribute="bottom" secondItem="Fqh-Dg-RDs" secondAttribute="bottom" id="JSn-9f-kbm"/>
+                <constraint firstItem="Fqh-Dg-RDs" firstAttribute="top" secondItem="qQV-DV-2HN" secondAttribute="top" id="Jo1-jG-13U"/>
+                <constraint firstAttribute="trailing" secondItem="qQV-DV-2HN" secondAttribute="trailing" id="Uu1-2E-mME"/>
+                <constraint firstItem="qQV-DV-2HN" firstAttribute="leading" secondItem="Q1a-TR-zvv" secondAttribute="leading" id="Vui-IE-IGF"/>
                 <constraint firstItem="GaJ-RW-FLe" firstAttribute="leading" secondItem="Q1a-TR-zvv" secondAttribute="leading" id="WvD-bE-afZ"/>
+                <constraint firstItem="qQV-DV-2HN" firstAttribute="bottom" secondItem="GaJ-RW-FLe" secondAttribute="bottom" constant="512" id="br5-31-vVq"/>
+                <constraint firstItem="Fqh-Dg-RDs" firstAttribute="leading" secondItem="Q1a-TR-zvv" secondAttribute="leading" id="cpE-KJ-hbQ"/>
+                <constraint firstAttribute="trailing" secondItem="Fqh-Dg-RDs" secondAttribute="trailing" id="eWs-FB-J5r"/>
                 <constraint firstItem="GaJ-RW-FLe" firstAttribute="height" secondItem="Q1a-TR-zvv" secondAttribute="height" multiplier="1:2" id="j7V-XS-ucO"/>
                 <constraint firstAttribute="trailing" secondItem="GaJ-RW-FLe" secondAttribute="trailing" id="rdY-Aa-KBy"/>
+                <constraint firstItem="qQV-DV-2HN" firstAttribute="top" secondItem="GaJ-RW-FLe" secondAttribute="bottom" id="tkB-vo-nHi"/>
             </constraints>
         </view>
     </objects>
