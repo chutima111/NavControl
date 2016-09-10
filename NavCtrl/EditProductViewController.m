@@ -165,6 +165,8 @@
     [_txfProductName release];
     [_txfProductURL release];
     [_txfProductImageURL release];
+    [_product release];
+    [_company release];
     [super dealloc];
 }
 @end

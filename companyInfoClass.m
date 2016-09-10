@@ -14,7 +14,8 @@
 {
     self = [super init];
     if (self) {
-        self.companyID = companyId;
+        _companyID = companyId;
+        _productsArray = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -46,7 +47,19 @@
             [defaults synchronize];
         }
     }
+    _productsArray = [[NSMutableArray alloc] init];
+
     return self;
+}
+
+-(void)dealloc {
+    [_productsArray release];
+    [_companyName release];
+    [_companyImageName release];
+    [_companyTicker release];
+    [_stockPrice release];
+    
+    [super dealloc];
 }
 
 @end

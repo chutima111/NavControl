@@ -43,6 +43,8 @@
     WKWebViewConfiguration *theConfiguration = [[WKWebViewConfiguration alloc] init];
     _webView = [[WKWebView alloc]initWithFrame:self.view.frame configuration:theConfiguration];
     
+    [theConfiguration release];
+    
     [_webView loadRequest:request];
 //    _webView.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
     [self.view addSubview:_webView];
@@ -83,9 +85,12 @@
 
 -(void) dealloc
 {
-    [super dealloc];
-    
     [self.webView release];
+    [self.product release];
+    [self.company release];
+    [self.productUrl release];
+    
+    [super dealloc];
 }
 
 @end

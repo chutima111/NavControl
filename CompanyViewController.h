@@ -26,5 +26,6 @@
 @property (retain, nonatomic) IBOutlet UITableView *tableView;
 
 @property (retain, nonatomic) IBOutlet UIView *emptyView;
+- (IBAction)addButtonPressed:(id)sender;
 
 @end

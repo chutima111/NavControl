@@ -20,5 +20,13 @@
     return self;
 }
 
+-(void)dealloc
+{
+    [_productName release];
+    [_productImage release];
+    [_productUrl release];
+    [super dealloc];
+}
+
 
 @end

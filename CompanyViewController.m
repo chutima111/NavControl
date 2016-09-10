@@ -41,7 +41,6 @@
     }
     return self;
 }*/
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -76,12 +75,15 @@
     // Set the navigation title
     self.title = @"Watch List";
     
+  
        
     // ADD ALL THE COMPANIES
     
     self.dao = [DAO sharedInstance];
     
     self.companies = self.dao.companyList;
+ 
+    
     
     // Allow the select the cell during the editing mode
     self.tableView.allowsSelectionDuringEditing = YES;
@@ -240,8 +242,9 @@
         // Delete the row from the data source
         
         [[DAO sharedInstance]deleteCompany:[self.companies objectAtIndex:indexPath.row]];
+        [self.dao saveChanges];
         
-      //  [self.companies removeObjectAtIndex:indexPath.row];
+      
         
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         
@@ -297,6 +300,8 @@
         editCompanyViewController.title = company.companyName;
         editCompanyViewController.company = company;
         
+        [company release];
+        
         [self.navigationController pushViewController:editCompanyViewController animated:YES];
         
         
@@ -311,17 +316,6 @@
         [self.navigationController pushViewController:self.productViewController animated:YES];
     }
     
-}
-
-#pragma mark - Additional methods
-
-- (UIImage *)reSizeImage:(UIImage *)image toSize:(CGSize)reSize
-{
-    UIGraphicsBeginImageContext(CGSizeMake(reSize.width, reSize.height));
-    [image drawInRect:CGRectMake(0, 0, reSize.width, reSize.height)];
-    UIImage *reSizeImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return reSizeImage;
 }
 
 
@@ -347,5 +341,15 @@
     [_btnRedo release];
     [_emptyView release];
     [super dealloc];
+}
+- (IBAction)addButtonPressed:(id)sender {
+    
+    //Create the next view controller
+    AddNewCompanyViewController *addNewCompanyViewController = [[AddNewCompanyViewController alloc] initWithNibName:@"AddNewCompanyViewController" bundle:nil];
+    
+    
+    // Push the view controller
+    [self.navigationController pushViewController:addNewCompanyViewController animated:YES];
+    
 }
 @end

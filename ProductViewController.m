@@ -50,6 +50,9 @@
     
     self.navigationItem.rightBarButtonItem = addButton;
     
+    // set the empty or bottom view hidded
+    self.bottomView.hidden = YES;
+    
     
    }
 
@@ -72,8 +75,14 @@
     
     self.lblNameAndTicker.text = [NSString stringWithFormat:@"%@ (%@)", self.company.companyName, self.company.companyTicker];
     
-    // set the empty or bottom view hidded
-    self.bottomView.hidden = YES;
+    if ([self.company.productsArray count] > 0) {
+        
+        // set the empty or bottom view hidded
+        self.bottomView.hidden = YES;
+    } else {
+        
+        self.bottomView.hidden = NO;
+    }
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
@@ -179,7 +188,7 @@
     
     // Push the view controller.
     [self.navigationController pushViewController:detailViewController animated:YES];
-    
+    [detailViewController release];
 }
 
 
@@ -209,6 +218,11 @@
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }
     [tableView reloadData];
+    
+    if ([self.company.productsArray count] == 0) {
+        self.bottomView.hidden = NO;
+    }
+    
 }
 
 
@@ -241,6 +255,18 @@
     [_bottomView release];
     [_imgCompany release];
     [_lblNameAndTicker release];
+    [_company release];
     [super dealloc];
+}
+- (IBAction)addButtonPressed:(id)sender {
+    
+    // Create the next view controller
+    AddNewProductViewController *addNewProductViewController = [[AddNewProductViewController alloc]initWithNibName:@"AddNewProductViewController" bundle:nil];
+    
+    addNewProductViewController.company = self.company;
+    
+    [self.navigationController pushViewController:addNewProductViewController animated:YES];
+    
+    
 }
 @end

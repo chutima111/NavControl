@@ -22,5 +22,6 @@
 @property (retain, nonatomic) IBOutlet UIView *bottomView;
 @property (retain, nonatomic) IBOutlet UIImageView *imgCompany;
 @property (retain, nonatomic) IBOutlet UILabel *lblNameAndTicker;
+- (IBAction)addButtonPressed:(id)sender;
 
 @end
