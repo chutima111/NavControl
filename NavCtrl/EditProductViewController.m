@@ -42,18 +42,7 @@
     self.txfProductImageURL.delegate = self;
     
     
-    // register for keyboard notifications
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyBoardWillShow:)
-                                                 name:UIKeyboardWillShowNotification
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyBoardWillHide)
-                                                 name:UIKeyboardWillHideNotification
-                                               object:nil];
-
-    
+        
 }
 
 - (void)didReceiveMemoryWarning {
@@ -61,32 +50,40 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)keyBoardWillShow:(NSNotification *)aNotification
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    // Move the text field up
-    NSDictionary *userInfo = [aNotification userInfo];
-    // get the size of the keyboard
-    CGSize keyboardSize = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    // register for keyboard notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyBoardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
     
-    
-    [self.txfProductImageURL setTranslatesAutoresizingMaskIntoConstraints:YES];
-    self.txfProductImageURL.frame = CGRectMake(self.txfProductImageURL.frame.origin.x,
-                                           keyboardSize.height - 20,
-                                           self.txfProductImageURL.frame.size.width,
-                                           self.txfProductImageURL.frame.size.height);
+    return YES;
+}
+
+-(BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{
+    // register for keyboard notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyBoardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+    return YES;
+}
+
+
+- (void)keyBoardWillShow:(NSNotification *)aNotification
+{
+    // Assign new frame to your view
+    [self.view setFrame:CGRectMake(0, -100, self.view.frame.size.width, self.view.frame.size.height)];
     
 }
 
--(void)keyBoardWillHide
+-(void)keyBoardWillHide:(NSNotification *)aNotification
 {
-    // Move the text fileds back up
-    self.txfProductImageURL.frame = CGRectMake(self.txfProductImageURL.frame.origin.x,
-                                               self.view.frame.size.height /2,
-                                               self.txfProductImageURL.frame.size.width,
-                                               self.txfProductImageURL.frame.size.height);
-    
-
+    [self.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
 }
+
 
 -(void)cancelButtonPressed
 {

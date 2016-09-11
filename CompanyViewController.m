@@ -169,6 +169,7 @@
 
     // Push the view controller
     [self.navigationController pushViewController:addNewCompanyViewController animated:YES];
+    [addNewCompanyViewController release];
 }
 
 
@@ -303,6 +304,7 @@
         [company release];
         
         [self.navigationController pushViewController:editCompanyViewController animated:YES];
+        [editCompanyViewController release];
         
         
     } else {
@@ -350,6 +352,8 @@
     
     // Push the view controller
     [self.navigationController pushViewController:addNewCompanyViewController animated:YES];
+    [addNewCompanyViewController release];
+    NSLog(@"test");
     
 }
 @end

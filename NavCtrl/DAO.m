@@ -379,7 +379,7 @@
 -(void)addNewCompanyToList:(NSString *)companyName
               companyImage:(NSString *)companyImage
              companyTicker:(NSString *)companyTicker
-             productsArray:(NSMutableArray *)productsArray
+             
 
 {
     companyInfoClass *newCompany = [[companyInfoClass alloc]init];

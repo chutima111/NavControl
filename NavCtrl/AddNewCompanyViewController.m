@@ -36,17 +36,6 @@
     
     self.navigationItem.leftBarButtonItem = cancelButton;
     
-    // register for keyboard notifications
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillShow:)
-                                                 name:UIKeyboardWillShowNotification
-                                               object:nil];
-    
-    // register for keyboard notifications
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillHide)
-                                                 name:UIKeyboardWillHideNotification
-                                               object:nil];
     
     // Set delegate to my text fields
     self.txfCompanyName.delegate = self;
@@ -55,32 +44,42 @@
     
 }
 
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    // register for keyboard notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    
+    return YES;
+
+}
+
+-(BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{
+    // register for keyboard notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+    [self.view endEditing:YES];
+    
+    return YES;
+
+}
+
 -(void) keyboardWillShow:(NSNotification *)aNotification
 {
-    // Move the text field up
-    NSDictionary *userInfo = [aNotification userInfo];
-    
-    // get the size of the keyboard
-    CGSize keyboardSize = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    
-
-    [self.txfCompanyName setTranslatesAutoresizingMaskIntoConstraints:YES];
-    self.txfCompanyName.frame = CGRectMake(self.txfCompanyName.frame.origin.x,
-                                           keyboardSize.height - 20,
-                                           self.txfCompanyName.frame.size.width,
-                                           self.txfCompanyName.frame.size.height);
-    
+        // Assign new frame to your view
+    [self.view setFrame:CGRectMake(0, -100, self.view.frame.size.width, self.view.frame.size.height)];
         
 }
 
--(void)keyboardWillHide
+-(void)keyboardWillHide:(NSNotification *)aNotification
 {
-    // Move the text fileds back up
-    self.txfCompanyName.frame = CGRectMake(self.txfCompanyName.frame.origin.x,
-                                           self.view.frame.size.height / 2,
-                                           self.txfCompanyName.frame.size.width,
-                                           self.txfCompanyName.frame.size.height);
-
+    [self.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    
 }
 
 
@@ -100,8 +99,8 @@
 {
     [[DAO sharedInstance] addNewCompanyToList:self.txfCompanyName.text
                                  companyImage:self.txfCompanyImageUrl.text
-                                companyTicker:self.txfCompanyTicker.text
-                                productsArray:[NSMutableArray array]];
+                                companyTicker:self.txfCompanyTicker.text];
+     
      
     
     
@@ -128,6 +127,7 @@
         
                 dispatch_async(dispatch_get_main_queue(), ^{
             [self.navigationController popViewControllerAnimated:YES];
+                  
         });
         
     }];

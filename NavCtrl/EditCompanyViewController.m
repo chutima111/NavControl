@@ -35,17 +35,6 @@
     
     self.navigationItem.leftBarButtonItem = cancleButton;
     
-    // register for keyboard notifications
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyBoardWillShow:)
-                                                 name:UIKeyboardWillShowNotification
-                                               object:nil];
-    
-    // register for keyboard notifications
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyBoardWillHide)
-                                                 name:UIKeyboardWillHideNotification
-                                               object:nil];
     
     // set the delegate to my text fields
     self.txfCompanyName.delegate = self;
@@ -59,32 +48,38 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)keyBoardWillShow:(NSNotification *)aNotification
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    // Move the text field up
-    NSDictionary *userInfo = [aNotification userInfo];
+    // register for keyboard notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyBoardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
     
-    // get the size of the keyboard
-    CGSize keyboardSize = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    
-    
-    [self.txfCompanyImageURL setTranslatesAutoresizingMaskIntoConstraints:YES];
-    self.txfCompanyImageURL.frame = CGRectMake(self.txfCompanyImageURL.frame.origin.x,
-                                           keyboardSize.height - 20,
-                                           self.txfCompanyImageURL.frame.size.width,
-                                           self.txfCompanyImageURL.frame.size.height);
-
+    return YES;
 }
 
--(void)keyBoardWillHide
+-(BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
-    // Move the text fileds back up
-    self.txfCompanyImageURL.frame = CGRectMake(self.txfCompanyImageURL.frame.origin.x,
-                                           self.view.frame.size.height / 2,
-                                           self.txfCompanyImageURL.frame.size.width,
-                                           self.txfCompanyImageURL.frame.size.height);
-    
+    // register for keyboard notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyBoardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+    return YES;
+}
 
+-(void)keyBoardWillShow:(NSNotification *)aNotification
+{
+    // Assign new frame to your view
+    [self.view setFrame:CGRectMake(0, -100, self.view.frame.size.width, self.view.frame.size.height)];
+    
+}
+
+-(void)keyBoardWillHide:(NSNotification *)aNotification
+{
+    [self.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    
 }
 
 -(void)cancelButtonPressed
@@ -166,6 +161,7 @@
     [_txfCompanyName release];
     [_txfCompanyImageURL release];
     [_txfCompanyTicker release];
+  
     [super dealloc];
 }
 @end

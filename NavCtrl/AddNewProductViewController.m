@@ -46,7 +46,7 @@
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyBoardWillHide)
+                                             selector:@selector(keyBoardWillHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
 
@@ -58,29 +58,38 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)keyBoardWillShow:(NSNotification *)aNotification
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    NSDictionary *userInfo = [aNotification userInfo];
-    // get the size of the keyboard
-    CGSize keyboardSize = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    // register for keyboard notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyBoardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
     
-    [self.txfProductURL setTranslatesAutoresizingMaskIntoConstraints:YES];
-    
-    // set the frame for text field
-    self.txfProductURL.frame = CGRectMake(self.txfProductURL.frame.origin.x,
-                                          keyboardSize.height -20,
-                                          self.txfProductURL.frame.size.width,
-                                          self.txfProductURL.frame.size.height);
-    
+    return YES;
 }
 
--(void)keyBoardWillHide
+-(BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
-    // Move the text field back up
-    self.txfProductURL.frame = CGRectMake(self.txfProductURL.frame.origin.x,
-                                          self.view.frame.size.height / 2,
-                                          self.txfProductURL.frame.size.width,
-                                          self.txfProductURL.frame.size.height);
+    // register for keyboard notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyBoardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+    return YES;
+}
+
+
+- (void)keyBoardWillShow:(NSNotification *)aNotification
+{
+    // Assign new frame to your view
+    [self.view setFrame:CGRectMake(0, -100, self.view.frame.size.width, self.view.frame.size.height)];
+
+}
+
+-(void)keyBoardWillHide:(NSNotification *)aNotification
+{
+     [self.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
