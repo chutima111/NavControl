@@ -45,10 +45,14 @@
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"navBackButton"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonPressed)];
     self.navigationItem.leftBarButtonItem = backButton;
     
+    [backButton release];
+    
     // Add the addButton in navigation bar
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewProduct)];
     
     self.navigationItem.rightBarButtonItem = addButton;
+    
+    [addButton release];
     
     // set the empty or bottom view hidded
     self.bottomView.hidden = YES;
@@ -112,6 +116,7 @@
     addNewProductViewController.company = self.company;
     
     [self.navigationController pushViewController:addNewProductViewController animated:YES];
+    [addNewProductViewController release];
     
 }
 
@@ -266,6 +271,8 @@
     addNewProductViewController.company = self.company;
     
     [self.navigationController pushViewController:addNewProductViewController animated:YES];
+    
+    [addNewProductViewController release];
     
     
 }

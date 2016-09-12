@@ -46,8 +46,10 @@
             [defaults setObject:@(self.companyID) forKey:@"companyID"];
             [defaults synchronize];
         }
+        
+         _productsArray = [[NSMutableArray alloc] init];
     }
-    _productsArray = [[NSMutableArray alloc] init];
+   
 
     return self;
 }

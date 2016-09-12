@@ -30,11 +30,13 @@
     UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveNewCompany)];
     
     self.navigationItem.rightBarButtonItem = saveButton;
+    [saveButton release];
     
     // Add CANCEL Button in navigation bar on the left side
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonPressed)];
     
     self.navigationItem.leftBarButtonItem = cancelButton;
+    [cancelButton release];
     
     
     // Set delegate to my text fields

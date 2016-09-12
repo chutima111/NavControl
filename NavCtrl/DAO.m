@@ -13,7 +13,7 @@
 #import "Company.h"
 #import "Product.h"
 
-@implementation DAO
+@implementation DAO 
 
 
 +(DAO *)sharedInstance
@@ -130,8 +130,8 @@
     theCompany.companyName = company.companyName;
     theCompany.companyImageName = company.companyImageName;
     theCompany.companyTicker = company.companyTicker;
-//    theCompany.companyID = [company.companyID intValue];
-//    theCompany.productsArray = [[NSMutableArray alloc]init];
+    //    theCompany.companyID = [company.companyID intValue];
+    //    theCompany.productsArray = [[NSMutableArray alloc]init];
     for (Product *product in company.products) {
         productClass *product1 = [[productClass alloc] init];
         product1.productName = product.productName;
@@ -151,7 +151,7 @@
     theCompany.companyImageName = company.companyImageName;
     theCompany.companyTicker = company.companyTicker;
     theCompany.companyID = @(company.companyID);
-//    theCompany.products = [NSSet setWithArray:company.productsArray];
+    //    theCompany.products = [NSSet setWithArray:company.productsArray];
     NSMutableArray *tempProductsArray = [NSMutableArray array];
     for (productClass *product in company.productsArray)
     {
@@ -162,7 +162,7 @@
         theProduct.companyID = @(product.companyID);
         
         [tempProductsArray addObject:theProduct];
-//        [theCompany setProducts:[NSSet setWithObject:theProduct]];
+        //        [theCompany setProducts:[NSSet setWithObject:theProduct]];
     }
     
     [theCompany setProducts:[NSSet setWithArray:tempProductsArray]];
@@ -173,46 +173,13 @@
 
 -(void)createCompaniesAndProducts
 {
-    // Test : create default value for company in core data
     
-    // Apple company
-/*    Company *apple = [NSEntityDescription insertNewObjectForEntityForName:@"Company" inManagedObjectContext:_managedObjectContext];
-    
-    [apple setCompanyName:@"Apple Inc"];
-    [apple setCompanyImageName:@"Apple Inc"];
-    [apple setCompanyTicker:@"AAPL"];
-    
-    
-    Product *iPhone = [NSEntityDescription insertNewObjectForEntityForName:@"Product" inManagedObjectContext:_managedObjectContext];
-    [iPhone setProductName:@"iPhone"];
-    [iPhone setProductImage:@"iPhoneImage"];
-    [iPhone setProductURL:@"http://www.apple.com/iphone/"];
-    
-    Product *iPad = [NSEntityDescription insertNewObjectForEntityForName:@"Product" inManagedObjectContext:_managedObjectContext];
-    [iPad setProductName:@"iPad"];
-    [iPad setProductImage:@"iPadImage"];
-    [iPad setProductURL:@"http://www.apple.com/ipad/"];
-    
-    Product *iPod = [NSEntityDescription insertNewObjectForEntityForName:@"Product" inManagedObjectContext:_managedObjectContext];
-    [iPod setProductName:@"iPod"];
-    [iPod setProductImage:@"iPodImage"];
-    [iPod setProductURL:@"http://www.apple.com/ipod/"];
-    
-    // Try to add products to the company [Both ways work]
-//    [iPhone setValue:apple forKey:@"company"];
-//    [iPad setValue:apple forKey:@"company"];
-//    [iPod setValue:apple forKey:@"company"];
-//    
-    [apple setProducts:[NSSet setWithObjects:iPhone, iPad, iPod, nil]];
-  */  
-    
- 
     // Create all default value for companies
     companyInfoClass *apple = [[companyInfoClass alloc]init];
     apple.companyName = @"Apple Inc";
     apple.companyImageName = @"Apple Inc";
     apple.companyTicker = @"AAPL";
-//    apple.productsArray = [NSMutableArray array];
+    //    apple.productsArray = [NSMutableArray array];
     
     productClass *iPhone = [[productClass alloc] initWithID:apple];
     iPhone.productName = @"iPhone";
@@ -243,7 +210,7 @@
     google.companyName = @"Google";
     google.companyImageName = @"Google";
     google.companyTicker = @"GOOG";
-//    google.productsArray = [NSMutableArray array];
+    //    google.productsArray = [NSMutableArray array];
     
     productClass *googleGmail = [[productClass alloc]initWithID:google];
     googleGmail.productName = @"Gmail";
@@ -267,7 +234,7 @@
     tesla.companyName = @"Tesla";
     tesla.companyImageName = @"Tesla";
     tesla.companyTicker = @"TSLA";
-//    tesla.productsArray = [NSMutableArray array];
+    //    tesla.productsArray = [NSMutableArray array];
     
     productClass *teslaModelS = [[productClass alloc]initWithID:tesla];
     teslaModelS.productName = @"Model S";
@@ -298,7 +265,7 @@
     ford.companyName = @"Ford";
     ford.companyImageName = @"Ford";
     ford.companyTicker = @"F";
-//    ford.productsArray = [NSMutableArray array];
+    //    ford.productsArray = [NSMutableArray array];
     
     productClass *fordFiesta = [[productClass alloc]initWithID:ford];
     fordFiesta.productName = @"Fiesta";
@@ -323,7 +290,7 @@
     [fordFiesta release];
     [fordFocus release];
     [fordMustang release];
- 
+    
     
     
     self.companyList = [NSMutableArray array];
@@ -344,12 +311,12 @@
     for (companyInfoClass *company in self.companyList) {
         Company *theCompany = [self convertCompanyInfoClassToManagedCompany:company];
         [theCompany release];
-       
+        
     }
     
     [self saveChanges];
     
-   }
+}
 
 -(void)saveChanges
 {
@@ -379,7 +346,7 @@
 -(void)addNewCompanyToList:(NSString *)companyName
               companyImage:(NSString *)companyImage
              companyTicker:(NSString *)companyTicker
-             
+
 
 {
     companyInfoClass *newCompany = [[companyInfoClass alloc]init];
@@ -405,7 +372,7 @@
      updateCompanyTicker:(NSString *)companyTicker
                  company:(companyInfoClass *)company
 {
-        // Fetch the company from the core data
+    // Fetch the company from the core data
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Company" inManagedObjectContext:_managedObjectContext];
     [fetchRequest setEntity:entity];
@@ -459,7 +426,7 @@
         if ([targetCompany.companyID intValue] == company.companyID)
             [_managedObjectContext deleteObject:targetCompany];
     }
-   
+    
     
     [self.companyList removeObject:company];
     
@@ -480,9 +447,9 @@
     productInfo.productUrl = productURL;
     productInfo.companyID = companyInfo.companyID;
     
-//    if (companyInfo.productsArray == nil) {
-//        companyInfo.productsArray = [NSMutableArray array];
-//    }
+    //    if (companyInfo.productsArray == nil) {
+    //        companyInfo.productsArray = [NSMutableArray array];
+    //    }
     [companyInfo.productsArray addObject:productInfo];
     
     [productInfo release];
@@ -508,14 +475,14 @@
     }
     for (Company *targetCompany in fethchedObjects) {
         if ([targetCompany.companyID intValue] == productInfo.companyID)
-           
-           [targetCompany addProducts:[NSSet setWithObject:newProduct]];
+            
+            [targetCompany addProducts:[NSSet setWithObject:newProduct]];
     }
     
     [fetchRequest release];
     
     [self saveChanges];
-
+    
     
 }
 
@@ -534,7 +501,7 @@
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %d", @"companyID", productInfo.companyID];
     [fetchRequest setPredicate:predicate];
     
-        NSError *error = nil;
+    NSError *error = nil;
     NSArray *fetchedObjects = [_managedObjectContext executeFetchRequest:fetchRequest error:&error];
     if (fetchedObjects == nil)
     {
@@ -542,21 +509,21 @@
     }
     
     else {
-            for (Product *targetProduct in fetchedObjects) {
-                if ([targetProduct.productName isEqualToString:productInfo.productName]) {
-            
-            targetProduct.productName = productName;
-            targetProduct.productImage = productImageURL;
-            targetProduct.productURL = productURL;
-                    
-                }
+        for (Product *targetProduct in fetchedObjects) {
+            if ([targetProduct.productName isEqualToString:productInfo.productName]) {
+                
+                targetProduct.productName = productName;
+                targetProduct.productImage = productImageURL;
+                targetProduct.productURL = productURL;
+                
             }
-            
-            [self saveChanges];
         }
+        
+        [self saveChanges];
+    }
     
     [fetchRequest release];
-        
+    
     
     // update product info to product object class
     productInfo.productName = productName;
@@ -596,8 +563,8 @@
     }
     
     [fetchRequest release];
-
-   
+    
+    
 }
 
 
@@ -620,53 +587,68 @@
     }
     NSString *newTickerString = [tickersString substringToIndex:[tickersString length] -1];
     
-//    NSString *urlStringWithTicker = @"http://finance.yahoo.com/d/quotes.csv?s=AAPL+GOOG+MSFT&f=sl1";
+    //    NSString *urlStringWithTicker = @"http://finance.yahoo.com/d/quotes.csv?s=AAPL+GOOG+MSFT&f=sl1";
     urlStringWithTickers = [NSString stringWithFormat:@"%@%@%@", urlStartString, newTickerString,urlEndString];
     NSURL *url = [NSURL URLWithString:urlStringWithTickers];
     NSURLSessionDownloadTask *downloadStockTask = [[NSURLSession sharedSession] downloadTaskWithURL:url completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
         
-        NSData *data = [NSData dataWithContentsOfURL:location];
-        
-        NSString* newStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        
-        NSLog(@"result = %@", newStr);
-        
-        // Separate the string to get individual ticker and stock price
-        NSString *newStringWithOutQuotation = [newStr stringByReplacingOccurrencesOfString:@"\"" withString:@""];
-        NSLog(@"%@", newStringWithOutQuotation);
-        
-        // Now put in array
-        NSArray *tickerAndPriceArray = [newStringWithOutQuotation componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@",\n"]];
-       
-        NSLog(@"%@", tickerAndPriceArray);
-        
-        [newStr release];
-        
-        for (int i = 0; i < [tickerAndPriceArray count]-1; i = i+2) {
-            NSString *ticker = tickerAndPriceArray[i];
-            Company *company = [self findCompanyByTicker:ticker];
-            company.stockPrice = [NSNumber numberWithInteger:[tickerAndPriceArray[i+1]integerValue]];
+        if (error) {
             
-            
-        }
-        
-        
-        
-        // get the main thred
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-        // Post the notification when the data is done downloading
-        [[NSNotificationCenter defaultCenter]
-         postNotificationName:@"StockDataReceived"
-         object:self];
-        });
-        
-    }];
+            // get the main thred
+            dispatch_async(dispatch_get_main_queue(), ^{
 
+            
+            // Post the notification when the data is done downloading
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:@"NoInternet"
+             object:self];
+            });
+            
+                        
+        } else {
+            
+            NSData *data = [NSData dataWithContentsOfURL:location];
+            
+            NSString* newStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            
+            NSLog(@"result = %@", newStr);
+            
+            // Separate the string to get individual ticker and stock price
+            NSString *newStringWithOutQuotation = [newStr stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+            NSLog(@"%@", newStringWithOutQuotation);
+            
+            // Now put in array
+            NSArray *tickerAndPriceArray = [newStringWithOutQuotation componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@",\n"]];
+            
+            NSLog(@"%@", tickerAndPriceArray);
+            
+            [newStr release];
+            
+            for (int i = 0; i < [tickerAndPriceArray count]-1; i = i+2) {
+                NSString *ticker = tickerAndPriceArray[i];
+                Company *company = [self findCompanyByTicker:ticker];
+                company.stockPrice = [NSNumber numberWithInteger:[tickerAndPriceArray[i+1]integerValue]];
+                
+                
+            }
+            
+            
+            
+            // get the main thred
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                // Post the notification when the data is done downloading
+                [[NSNotificationCenter defaultCenter]
+                 postNotificationName:@"StockDataReceived"
+                 object:self];
+            });
+        }
+    }];
+    
     [downloadStockTask resume];
     
     
-        
+    
     
 }
 

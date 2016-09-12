@@ -24,10 +24,14 @@
     UIBarButtonItem *editButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editProductInfo)];
     self.navigationItem.rightBarButtonItem = editButton;
     
+    [editButton release];
+    
     // set the back button image to the navigation bar
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"navBackButton"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonPressed)];
     
     self.navigationItem.leftBarButtonItem = backButton;
+    
+    [backButton release];
     
     // set title for the navigation controller
     self.title = @"Product Link";
@@ -66,6 +70,7 @@
 
     
     [self.navigationController pushViewController:editProductViewController animated:YES];
+    [editProductViewController release];
 }
 
 -(void)backButtonPressed

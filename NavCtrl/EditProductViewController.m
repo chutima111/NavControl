@@ -26,10 +26,14 @@
     
     self.navigationItem.rightBarButtonItem = saveButton;
     
+    [saveButton release];
+    
     // set cancel button on the left
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonPressed)];
     
     self.navigationItem.leftBarButtonItem = cancelButton;
+    
+    [cancelButton release];
     
     // Set up the text field
     self.txfProductName.text = self.product.productName;

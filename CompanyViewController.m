@@ -19,7 +19,7 @@
 
 
 
-@interface CompanyViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface CompanyViewController () <UITableViewDelegate, UITableViewDataSource, UIViewControllerAnimatedTransitioning>
 {
     UIBarButtonItem *editButton;
 }
@@ -30,17 +30,7 @@
 @end
 
 @implementation CompanyViewController
-/*
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    
-    if (self) {
-        // Custom initialization
-        
-    }
-    return self;
-}*/
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -88,6 +78,13 @@
     // Allow the select the cell during the editing mode
     self.tableView.allowsSelectionDuringEditing = YES;
     
+    // Listen to the post when get error
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(alertMessage)
+                                                 name:@"NoInternet"
+                                               object:nil];
+
+    
     // Listen to the post when data (Stock price) is done downloading
     // And I want to refresh or reload table view to show the stock price
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -98,16 +95,39 @@
         self.emptyView.hidden = NO;
     }
     else {
-    [self.dao getStockPrice];
+        NSTimer *time = [NSTimer scheduledTimerWithTimeInterval:60.0
+                                                         target:self
+                                                       selector:@selector(refreshStockQuote)
+                                                       userInfo:nil
+                                                        repeats:YES];
+        
     }
     
     }
 
-
+-(void)refreshStockQuote
+{
+    [self.dao getStockPrice];
+    [self.tableView reloadData];
+}
 
 -(void)refreshData
 {
     [self.tableView reloadData];
+}
+
+-(void)alertMessage
+{
+    // show the alert view
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Eror" message:@"There is no internet!" preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK"
+                                                       style:UIAlertActionStyleDefault handler:nil];
+    
+    [alertController addAction:actionOK];
+    [self presentViewController:alertController animated:YES completion:nil];
+    
+
 }
 
 -(void) viewWillAppear:(BOOL)animated
@@ -170,6 +190,18 @@
     // Push the view controller
     [self.navigationController pushViewController:addNewCompanyViewController animated:YES];
     [addNewCompanyViewController release];
+}
+
+#pragma mark - Custom view controller animation
+
+-(NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext
+{
+    return 2.0;
+}
+
+-(void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext
+{
+    
 }
 
 
@@ -356,4 +388,6 @@
     NSLog(@"test");
     
 }
+
+
 @end

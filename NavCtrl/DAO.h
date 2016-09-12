@@ -12,7 +12,7 @@
 @class companyInfoClass;
 @class productClass;
 
-@interface DAO : NSObject
+@interface DAO : NSObject <UIAlertViewDelegate>
 
 @property (strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;

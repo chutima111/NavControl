@@ -34,22 +34,16 @@
     
     self.navigationItem.rightBarButtonItem = saveButton;
     
+    [saveButton release];
+    
     // Add back button image on navigation bar on the left
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"navBackButton"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonPressed)];
     
     self.navigationItem.leftBarButtonItem = backButton;
+    
+    [backButton release];
 
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyBoardWillShow:)
-                                                 name:UIKeyboardWillShowNotification
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyBoardWillHide:)
-                                                 name:UIKeyboardWillHideNotification
-                                               object:nil];
-
     
 }
 
@@ -154,7 +148,6 @@
 - (void)dealloc {
     [_txfProductName release];
     [_txfProductURL release];
-    [_txfProductName release];
     [_txfProductImageURL release];
     [_company release];
     [super dealloc];
