@@ -19,7 +19,7 @@
 
 
 
-@interface CompanyViewController () <UITableViewDelegate, UITableViewDataSource, UIViewControllerAnimatedTransitioning>
+@interface CompanyViewController () <UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate>
 {
     UIBarButtonItem *editButton;
 }
@@ -186,22 +186,17 @@
     //Create the next view controller
     AddNewCompanyViewController *addNewCompanyViewController = [[AddNewCompanyViewController alloc] initWithNibName:@"AddNewCompanyViewController" bundle:nil];
     
-
-    // Push the view controller
-    [self.navigationController pushViewController:addNewCompanyViewController animated:YES];
-    [addNewCompanyViewController release];
-}
-
-#pragma mark - Custom view controller animation
-
--(NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext
-{
-    return 2.0;
-}
-
--(void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext
-{
+    // Set transition between view controller
+    CATransition* transition = [CATransition animation];
+    transition.duration = 0.5;
+    transition.type = @"oglFlip";
+    transition.subtype = kCATransitionFromRight; //kCATransitionFromLeft, kCATransitionFromRight, kCATransitionFromTop, kCATransitionFromBottom
+    [self.navigationController.view.layer addAnimation:transition forKey:nil];
     
+    [self.navigationController pushViewController:addNewCompanyViewController animated:YES];
+
+
+        [addNewCompanyViewController release];
 }
 
 
@@ -335,7 +330,10 @@
         
         [company release];
         
+        // Set transition between view controller
+        [self setTransitionBetweenViewController];
         [self.navigationController pushViewController:editCompanyViewController animated:YES];
+        
         [editCompanyViewController release];
         
         
@@ -345,11 +343,23 @@
         companyInfoClass *company = self.companies[indexPath.row];
         self.productViewController.title = company.companyName;
         self.productViewController.company = company;
-        
-        
+       
+        // Set transition between view controller
+        [self setTransitionBetweenViewController];
         [self.navigationController pushViewController:self.productViewController animated:YES];
+
     }
     
+}
+
+-(void)setTransitionBetweenViewController
+{
+    CATransition* transition = [CATransition animation];
+    transition.duration = 0.5;
+    transition.type = @"oglFlip";
+    transition.subtype = kCATransitionFromRight; //kCATransitionFromLeft, kCATransitionFromRight, kCATransitionFromTop, kCATransitionFromBottom
+    
+    return [self.navigationController.view.layer addAnimation:transition forKey:nil];
 }
 
 
@@ -381,11 +391,11 @@
     //Create the next view controller
     AddNewCompanyViewController *addNewCompanyViewController = [[AddNewCompanyViewController alloc] initWithNibName:@"AddNewCompanyViewController" bundle:nil];
     
-    
-    // Push the view controller
+    [self setTransitionBetweenViewController];
     [self.navigationController pushViewController:addNewCompanyViewController animated:YES];
+    
     [addNewCompanyViewController release];
-    NSLog(@"test");
+  
     
 }
 

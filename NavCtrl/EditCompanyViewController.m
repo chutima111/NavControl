@@ -86,6 +86,13 @@
 
 -(void)cancelButtonPressed
 {
+    // Set transition between view controller
+    CATransition* transition = [CATransition animation];
+    transition.duration = 0.5;
+    transition.type = @"oglFlip";
+    transition.subtype = kCATransitionFromRight; //kCATransitionFromLeft, kCATransitionFromRight, kCATransitionFromTop, kCATransitionFromBottom
+    [self.navigationController.view.layer addAnimation:transition forKey:nil];
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -119,6 +126,12 @@
         
         
         dispatch_async(dispatch_get_main_queue(), ^{
+            // Set transition between view controller
+            CATransition* transition = [CATransition animation];
+            transition.duration = 0.5;
+            transition.type = @"oglFlip";
+            transition.subtype = kCATransitionFromRight; //kCATransitionFromLeft, kCATransitionFromRight, kCATransitionFromTop, kCATransitionFromBottom
+            [self.navigationController.view.layer addAnimation:transition forKey:nil];
             [self.navigationController popViewControllerAnimated:YES];
         });
         

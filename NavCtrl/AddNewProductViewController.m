@@ -94,6 +94,14 @@
 
 -(void)backButtonPressed
 {
+    // Set transition between view controller
+    CATransition* transition = [CATransition animation];
+    transition.duration = 0.5;
+    transition.type = @"oglFlip";
+    transition.subtype = kCATransitionFromRight; //kCATransitionFromLeft, kCATransitionFromRight, kCATransitionFromTop, kCATransitionFromBottom
+    
+    [self.navigationController.view.layer addAnimation:transition forKey:nil];
+
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -126,6 +134,14 @@
         // Because downloading the image from URL is doing in the background thred
         
         dispatch_async(dispatch_get_main_queue(), ^{
+            // Set transition between view controller
+            CATransition* transition = [CATransition animation];
+            transition.duration = 0.5;
+            transition.type = @"oglFlip";
+            transition.subtype = kCATransitionFromRight; //kCATransitionFromLeft, kCATransitionFromRight, kCATransitionFromTop, kCATransitionFromBottom
+            
+            [self.navigationController.view.layer addAnimation:transition forKey:nil];
+
             [self.navigationController popViewControllerAnimated:YES];
         });
         

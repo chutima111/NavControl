@@ -20,15 +20,6 @@
 
 @implementation ProductViewController
 
-//- (id)initWithStyle:(UITableViewStyle)style
-//{
-//    self = [super initWithStyle:style];
-//    if (self) {
-//        // Custom initialization
-//    }
-//    return self;
-//}
-//
 
 - (void)viewDidLoad
 {
@@ -56,6 +47,7 @@
     
     // set the empty or bottom view hidded
     self.bottomView.hidden = YES;
+
     
     
    }
@@ -115,6 +107,8 @@
     
     addNewProductViewController.company = self.company;
     
+    [self setTransitionAnimation];
+    
     [self.navigationController pushViewController:addNewProductViewController animated:YES];
     [addNewProductViewController release];
     
@@ -122,6 +116,7 @@
 
 -(void)backButtonPressed
 {
+    [self setTransitionAnimation];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -189,7 +184,8 @@
     detailViewController.product = product;
     detailViewController.company = _company;
     
-    
+    // Set animation for transition between view controller
+    [self setTransitionAnimation];
     
     // Push the view controller.
     [self.navigationController pushViewController:detailViewController animated:YES];
@@ -261,6 +257,7 @@
     [_imgCompany release];
     [_lblNameAndTicker release];
     [_company release];
+   
     [super dealloc];
 }
 - (IBAction)addButtonPressed:(id)sender {
@@ -270,10 +267,22 @@
     
     addNewProductViewController.company = self.company;
     
+    [self setTransitionAnimation];
     [self.navigationController pushViewController:addNewProductViewController animated:YES];
     
     [addNewProductViewController release];
     
     
+}
+
+-(void)setTransitionAnimation
+{
+    // Set transition between view controller
+    CATransition* transition = [CATransition animation];
+    transition.duration = 0.5;
+    transition.type = @"oglFlip";
+    transition.subtype = kCATransitionFromRight; //kCATransitionFromLeft, kCATransitionFromRight, kCATransitionFromTop, kCATransitionFromBottom
+    
+    return [self.navigationController.view.layer addAnimation:transition forKey:nil];
 }
 @end

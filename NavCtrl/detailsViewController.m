@@ -68,13 +68,28 @@
     editProductViewController.product = self.product;
     editProductViewController.company = self.company;
 
+    // Set transition between view controller
+    CATransition* transition = [CATransition animation];
+    transition.duration = 0.5;
+    transition.type = @"oglFlip";
+    transition.subtype = kCATransitionFromRight; //kCATransitionFromLeft, kCATransitionFromRight, kCATransitionFromTop, kCATransitionFromBottom
     
+    [self.navigationController.view.layer addAnimation:transition forKey:nil];
+
     [self.navigationController pushViewController:editProductViewController animated:YES];
     [editProductViewController release];
 }
 
 -(void)backButtonPressed
 {
+    // Set transition between view controller
+    CATransition* transition = [CATransition animation];
+    transition.duration = 0.5;
+    transition.type = @"oglFlip";
+    transition.subtype = kCATransitionFromRight; //kCATransitionFromLeft, kCATransitionFromRight, kCATransitionFromTop, kCATransitionFromBottom
+    
+    [self.navigationController.view.layer addAnimation:transition forKey:nil];
+
     [self.navigationController popViewControllerAnimated:YES];
 }
 

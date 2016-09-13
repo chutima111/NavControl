@@ -24,4 +24,5 @@
 @property (retain, nonatomic) IBOutlet UILabel *lblNameAndTicker;
 - (IBAction)addButtonPressed:(id)sender;
 
+
 @end
