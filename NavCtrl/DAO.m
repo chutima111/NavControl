@@ -181,29 +181,37 @@
     apple.companyTicker = @"AAPL";
     //    apple.productsArray = [NSMutableArray array];
     
-    productClass *iPhone = [[productClass alloc] initWithID:apple];
-    iPhone.productName = @"iPhone";
-    iPhone.productImage = @"iPhoneImage";
-    iPhone.productUrl = @"http://www.apple.com/iphone/";
+    productClass *macPro = [[productClass alloc] initWithID:apple];
+    macPro.productName = @"MacBook Pro";
+    macPro.productImage = @"MacBook Pro";
+    macPro.productUrl = @"http://www.apple.com/mac-pro/";
     
-    productClass *iPad = [[productClass alloc] initWithID:apple];
-    iPad.productName = @"iPad";
-    iPad.productImage = @"iPadImage";
-    iPad.productUrl = @"http://www.apple.com/ipad/";
+    [apple.productsArray addObject:macPro];
+    [macPro release];
     
-    productClass *iPod = [[productClass alloc] initWithID:apple];
-    iPod.productName = @"iPod";
-    iPod.productImage = @"iPodImage";
-    iPod.productUrl = @"http://www.apple.com/ipod/";
-    
-    // Add product information in the apple company
-    [apple.productsArray addObject:iPhone];
-    [apple.productsArray addObject:iPad];
-    [apple.productsArray addObject:iPod];
-    
-    [iPhone release];
-    [iPad release];
-    [iPod release];
+//    productClass *iPhone = [[productClass alloc] initWithID:apple];
+//    iPhone.productName = @"iPhone";
+//    iPhone.productImage = @"iPhoneImage";
+//    iPhone.productUrl = @"http://www.apple.com/iphone/";
+//    
+//    productClass *iPad = [[productClass alloc] initWithID:apple];
+//    iPad.productName = @"iPad";
+//    iPad.productImage = @"iPadImage";
+//    iPad.productUrl = @"http://www.apple.com/ipad/";
+//    
+//    productClass *iPod = [[productClass alloc] initWithID:apple];
+//    iPod.productName = @"iPod";
+//    iPod.productImage = @"iPodImage";
+//    iPod.productUrl = @"http://www.apple.com/ipod/";
+//    
+//    // Add product information in the apple company
+//    [apple.productsArray addObject:iPhone];
+//    [apple.productsArray addObject:iPad];
+//    [apple.productsArray addObject:iPod];
+//    
+//    [iPhone release];
+//    [iPad release];
+//    [iPod release];
     
     // GROUP GOOGLE COMPANY AND ITS PRODUCTS
     companyInfoClass *google = [[companyInfoClass alloc] init];

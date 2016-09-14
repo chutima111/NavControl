@@ -292,7 +292,7 @@
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
-    companyInfoClass *company = [self.companies objectAtIndex:fromIndexPath.row];
+    companyInfoClass *company = [[self.companies objectAtIndex:fromIndexPath.row]retain];
     [self.companies removeObject:company];
     [self.companies insertObject:company atIndex:toIndexPath.row];
 }
