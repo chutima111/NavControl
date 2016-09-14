@@ -119,7 +119,7 @@
 -(void)alertMessage
 {
     // show the alert view
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Eror" message:@"There is no internet!" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error" message:@"There is no internet!" preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK"
                                                        style:UIAlertActionStyleDefault handler:nil];

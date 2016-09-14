@@ -9,7 +9,7 @@
 #import "detailsViewController.h"
 #import "EditProductViewController.h"
 
-@interface detailsViewController ()
+@interface detailsViewController () <WKNavigationDelegate>
 
 @end
 
@@ -46,13 +46,31 @@
     
     WKWebViewConfiguration *theConfiguration = [[WKWebViewConfiguration alloc] init];
     _webView = [[WKWebView alloc]initWithFrame:self.view.frame configuration:theConfiguration];
+    _webView.navigationDelegate = self;
     
     [theConfiguration release];
     
     [_webView loadRequest:request];
-//    _webView.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
+    
     [self.view addSubview:_webView];
 }
+
+-(void) webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation withError:(NSError *)error
+{
+    if (error.code == NSURLErrorNotConnectedToInternet) {
+                // show the alert view
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error" message:@"There is no internet!" preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK"
+                                                           style:UIAlertActionStyleDefault handler:nil];
+        
+        [alertController addAction:actionOK];
+        [self presentViewController:alertController animated:YES completion:nil];
+        
+
+    }
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

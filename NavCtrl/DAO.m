@@ -121,9 +121,9 @@
         NSLog(@"test");
     }
     
-#pragma mark convenient method
-    
 }
+
+#pragma mark convenient method
 
 -(companyInfoClass*)convertManagedCompanyToCIC:(Company *) company{
     companyInfoClass *theCompany = [[companyInfoClass alloc]initWithId:[company.companyID intValue]];
@@ -626,12 +626,11 @@
             
             for (int i = 0; i < [tickerAndPriceArray count]-1; i = i+2) {
                 NSString *ticker = tickerAndPriceArray[i];
-                Company *company = [self findCompanyByTicker:ticker];
-                company.stockPrice = [NSNumber numberWithInteger:[tickerAndPriceArray[i+1]integerValue]];
-                
+                companyInfoClass *company = [self findCompanyByTicker:ticker];
+                company.stockPrice = tickerAndPriceArray[i+1];
+            
                 
             }
-            
             
             
             // get the main thred
@@ -646,25 +645,20 @@
     }];
     
     [downloadStockTask resume];
-    
-    
+
     
     
 }
 
--(Company *)findCompanyByTicker:(NSString *)ticker
+-(companyInfoClass *)findCompanyByTicker:(NSString *)ticker
 {
-    for (Company *company in self.companyList) {
+    for (companyInfoClass *company in self.companyList) {
         if ([company.companyTicker isEqualToString:ticker])
             return company;
     }
     
     return nil;
 }
-
-
-
-
 
 
 
